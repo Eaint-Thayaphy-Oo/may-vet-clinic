@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@mui/material";
 import React, { useState } from "react";
+import data from "../../Data/data";
 
 type patientData = {
   id: number;
@@ -27,73 +28,7 @@ type patientData = {
 };
 
 export default function table() {
-  const [data, setData] = useState<patientData[]>([
-    {
-      id: 1,
-      name: "Mj",
-      status: "picky",
-      pawrent: "NayChi",
-      breed: "spaniel",
-      gender: "female",
-      birth: "2016-4-01",
-      phone: "12345",
-      address: "no15",
-      township: "shan",
-      city: "pan lone",
-    },
-    {
-      id: 2,
-      name: "Pink pink",
-      status: "allergy",
-      pawrent: "kyaw kyaw",
-      breed: "golden",
-      gender: "male",
-      birth: "2020-1-09",
-      phone: "125456",
-      address: "no12",
-      township: "mandalay",
-      city: "mahar si thu",
-    },
-    {
-      id: 3,
-      name: "jelly ",
-      pawrent: "mama",
-      gender: "female",
-      phone: "12324",
-      city: "yangon",
-      status: "picky",
-      breed: "breed",
-      birth: "2023-11-30T17:30:00.000Z",
-      address: "no.56",
-      township: "yangon",
-    },
-    {
-      id: 4,
-      name: "boo ",
-      pawrent: "mg kyaw",
-      gender: "male",
-      phone: "56879",
-      city: "tarmwae",
-      status: "allery",
-      breed: "golden",
-      birth: "4.5.2024",
-      address: "no.34",
-      township: "yangon",
-    },
-    {
-      id: 5,
-      name: "Lu Lu ",
-      pawrent: "NayChi",
-      gender: "female",
-      phone: "654654",
-      city: "insein",
-      status: "picky",
-      breed: "spaniel",
-      birth: "9.2.2021",
-      address: "no.7",
-      township: "yangon",
-    },
-  ]);
+  const [items, setItem] = useState<patientData[]>(data);
 
   return (
     <>
@@ -205,24 +140,24 @@ export default function table() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((d) => (
-              <TableRow key={d.id}>
+            {items.map((item) => (
+              <TableRow key={item.id}>
                 {/* <TableCell>
                   <Checkbox
                     checked={selectedItems.includes(d.id)}
                     onChange={() => handleCheckboxChange(d.id)}
                   />
                 </TableCell> */}
-                <TableCell>{d.id}</TableCell>
-                <TableCell>{d.name}</TableCell>
-                <TableCell>{d.status}</TableCell>
-                <TableCell>{d.pawrent}</TableCell>
-                <TableCell>{d.breed}</TableCell>
-                <TableCell>{d.gender}</TableCell>
-                <TableCell>{d.birth}</TableCell>
-                <TableCell>{d.phone}</TableCell>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.status}</TableCell>
+                <TableCell>{item.pawrent}</TableCell>
+                <TableCell>{item.breed}</TableCell>
+                <TableCell>{item.gender}</TableCell>
+                <TableCell>{item.birth}</TableCell>
+                <TableCell>{item.phone}</TableCell>
                 <TableCell>
-                  {d.address},{d.city},{d.township}.
+                  {item.address},{item.city},{item.township}.
                 </TableCell>
               </TableRow>
             ))}

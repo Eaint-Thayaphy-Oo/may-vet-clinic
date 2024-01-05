@@ -79,3 +79,5 @@ const data: patientData[] = [
     township: "yangon",
   },
 ];
+
+export default data;
