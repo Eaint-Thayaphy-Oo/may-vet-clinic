@@ -1,0 +1,44 @@
+.container {
+  background-color: #fff;
+  margin: 20px;
+  position: relative;
+}
+
+.firstblock {
+  padding: 20px;
+}
+
+.header {
+  font-style: Poppins;
+  font-size: 22px;
+  font-weight: Semibold;
+  color: #54bab9;
+  margin-bottom: 20px;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.icon {
+  position: absolute;
+  inset: 75px;
+  color: #54bab9;
+  margin-left: 140px;
+  margin-top: 10px;
+}
+
+.select {
+  margin-top: 10px;
+}
+
+.p {
+  margin-top: 20px;
+  margin-left: 5px;
+  font-style: Poppins;
+  font-size: 14px;
+  font-weight: regular;
+  color: #000000;
+}
