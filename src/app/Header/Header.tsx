@@ -1,7 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import styles from "./Header.module.css";
-import { Button, TextField } from "@mui/material";
+import { Button, Dialog, TextField } from "@mui/material";
 import { CiSearch } from "react-icons/ci";
+import Create from "@/components/Dialog/Create";
 
 const status = [
   { value: "all", label: "Status All" },
@@ -23,6 +26,16 @@ const rows = [
 ];
 
 export default function header() {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -91,6 +104,7 @@ export default function header() {
           <div className={styles.secondblock}>
             <Button
               variant="contained"
+              onClick={handleClickOpen}
               sx={{
                 marginTop: "60px",
                 marginRight: "50px",
@@ -124,6 +138,9 @@ export default function header() {
                 ))}
               </TextField>
             </h4>
+            <Dialog open={open} onClose={handleClose}>
+              <Create />
+            </Dialog>
           </div>
         </div>
       </div>

@@ -27,8 +27,25 @@ type patientData = {
   city: string;
 };
 
-export default function table() {
-  const [items, setItem] = useState<patientData[]>(data);
+interface TableProps {
+  data: patientData[];
+}
+
+export default function TableComponent({ data }: TableProps) {
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const handleCheckboxChange = (id: number) => {
+    if (selectedItems.includes(id)) {
+      setSelectedItems(selectedItems.filter((item) => item !== id));
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
+  };
+
+  const handleSelectAll = () => {
+    const allItemIds = data.map((d) => d.id);
+    setSelectedItems(allItemIds);
+  };
 
   return (
     <>
@@ -36,16 +53,16 @@ export default function table() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {/* <TableCell>
+              <TableCell>
                 <Checkbox
                   indeterminate={
                     selectedItems.length > 0 &&
-                    selectedItems.length < items.length
+                    selectedItems.length < data.length
                   }
-                  checked={selectedItems.length === items.length}
+                  checked={selectedItems.length === data.length}
                   onChange={handleSelectAll}
                 />
-              </TableCell> */}
+              </TableCell>
               <TableCell
                 sx={{
                   fontStyle: "Poppins",
@@ -140,24 +157,24 @@ export default function table() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {items.map((item) => (
-              <TableRow key={item.id}>
-                {/* <TableCell>
+            {data.map((d) => (
+              <TableRow key={d.id}>
+                <TableCell>
                   <Checkbox
                     checked={selectedItems.includes(d.id)}
                     onChange={() => handleCheckboxChange(d.id)}
                   />
-                </TableCell> */}
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.status}</TableCell>
-                <TableCell>{item.pawrent}</TableCell>
-                <TableCell>{item.breed}</TableCell>
-                <TableCell>{item.gender}</TableCell>
-                <TableCell>{item.birth}</TableCell>
-                <TableCell>{item.phone}</TableCell>
+                </TableCell>
+                <TableCell>{d.id}</TableCell>
+                <TableCell>{d.name}</TableCell>
+                <TableCell>{d.status}</TableCell>
+                <TableCell>{d.pawrent}</TableCell>
+                <TableCell>{d.breed}</TableCell>
+                <TableCell>{d.gender}</TableCell>
+                <TableCell>{d.birth}</TableCell>
+                <TableCell>{d.phone}</TableCell>
                 <TableCell>
-                  {item.address},{item.city},{item.township}.
+                  {d.address},{d.city},{d.township}.
                 </TableCell>
               </TableRow>
             ))}
