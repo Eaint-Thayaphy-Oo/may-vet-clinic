@@ -10,9 +10,9 @@ import {
   OutlinedInput,
   Radio,
   RadioGroup,
-  TextField,
+  Select,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -21,8 +21,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 interface IFormInput {
   name: string;
   pawrent: string;
+  gender: string;
   phone: number;
+  city: string;
+  status: string;
+  breed: string;
+  dateOfBirth: Date;
   address: string;
+  township: string;
 }
 
 const statusOptions = [
@@ -53,217 +59,267 @@ const townshipOptions = [
 ];
 
 export default function Create() {
+  const [open, setOpen] = useState(true);
+  const [patientData, setPatientData] = useState<IFormInput[]>([]);
+
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(data);
+    // console.log(data);
+    setPatientData((prevData) => [...prevData, data]);
+    handleClose();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <DialogTitle
-        sx={{
-          color: "#54bab9",
-          textAlign: "center",
-          fontStyle: "Poppins",
-          fontSize: "18px",
-          fontWeight: "medium",
-        }}
-      >
-        Add new patient
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText
-          sx={{
-            fontStyle: "Poppins",
-            fontSize: "12px",
-            fontWeight: "regular",
-            color: "#444444",
-            textAlign: "center",
-          }}
-        >
-          Enter new patient information below
-        </DialogContentText>
-        <DialogActions>
-          <div>
-            <FormControl error={!!errors["name"]}>
-              <FormLabel>Pet Name</FormLabel>
-              <Controller
-                control={control}
-                rules={{ required: true }}
-                name="name"
-                render={({ field }) => (
-                  <OutlinedInput
-                    error={!!errors["name"]}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(e.target.value)}
-                  />
-                )}
-              />
-            </FormControl>
-            <FormControl error={!!errors["pawrent"]}>
-              <FormLabel>Pawrent</FormLabel>
-              <Controller
-                control={control}
-                rules={{ required: true }}
-                name="pawrent"
-                render={({ field }) => (
-                  <OutlinedInput
-                    error={!!errors["pawrent"]}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(e.target.value)}
-                  />
-                )}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Gender</FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-              >
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                />
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                />
-              </RadioGroup>
-            </FormControl>
-            <FormControl error={!!errors["phone"]}>
-              <FormLabel>Contact Phone No.</FormLabel>
-              <Controller
-                control={control}
-                rules={{ required: true }}
-                name="phone"
-                render={({ field }) => (
-                  <OutlinedInput
-                    error={!!errors["phone"]}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(e.target.value)}
-                  />
-                )}
-              />
-            </FormControl>
-            <DialogContentText>City</DialogContentText>
-            <TextField
-              id="outlined-select-currency-native"
-              select
-              label=""
-              SelectProps={{
-                native: true,
-                sx: {
-                  width: "222px",
-                },
+    <>
+      {open && (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle
+            sx={{
+              color: "#54bab9",
+              textAlign: "center",
+              fontStyle: "Poppins",
+              fontSize: "18px",
+              fontWeight: "medium",
+            }}
+          >
+            Add new patient
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText
+              sx={{
+                fontStyle: "Poppins",
+                fontSize: "12px",
+                fontWeight: "regular",
+                color: "#444444",
+                textAlign: "center",
               }}
-              helperText=""
             >
-              {cityOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
-          </div>
-          <div>
-            <DialogContentText>Status</DialogContentText>
-            <TextField
-              id="outlined-select-currency-native"
-              select
-              label=""
-              SelectProps={{
-                native: true,
-                sx: {
-                  width: "222px",
-                },
-              }}
-              helperText=""
-            >
-              {statusOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
-            <DialogContentText>Breed</DialogContentText>
-            <TextField
-              id="outlined-select-currency-native"
-              select
-              label=""
-              SelectProps={{
-                native: true,
-                sx: {
-                  width: "222px",
-                },
-              }}
-              helperText=""
-            >
-              {breedOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
-            <DialogContentText>Date of Birth</DialogContentText>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker sx={{ width: "222px" }} />
-            </LocalizationProvider>
-            <FormControl error={!!errors["address"]}>
-              <FormLabel>Address</FormLabel>
-              <Controller
-                control={control}
-                rules={{ required: true }}
-                name="address"
-                render={({ field }) => (
-                  <OutlinedInput
-                    error={!!errors["address"]}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(e.target.value)}
+              Enter new patient information below
+            </DialogContentText>
+            <DialogActions>
+              <div>
+                <FormControl error={!!errors["name"]}>
+                  <FormLabel>Pet Name</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="name"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["name"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                      />
+                    )}
                   />
-                )}
-              />
-            </FormControl>
-            <DialogContentText>Township</DialogContentText>
-            <TextField
-              id="outlined-select-currency-native"
-              select
-              label=""
-              SelectProps={{
-                native: true,
-                sx: {
-                  width: "222px",
-                },
-              }}
-              helperText=""
+                </FormControl>
+                <FormControl error={!!errors["pawrent"]}>
+                  <FormLabel>Pawrent</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="pawrent"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["pawrent"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                      />
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["gender"]}>
+                  <FormLabel>Gender</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="gender"
+                    render={({ field }) => (
+                      <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                      >
+                        <FormControlLabel
+                          value="male"
+                          control={<Radio />}
+                          label="Male"
+                        />
+                        <FormControlLabel
+                          value="female"
+                          control={<Radio />}
+                          label="Female"
+                        />
+                      </RadioGroup>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["phone"]}>
+                  <FormLabel>Contact Phone No.</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="phone"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["phone"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                      />
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["city"]}>
+                  <FormLabel>City</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="city"
+                    render={({ field }) => (
+                      <Select
+                        native
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        sx={{ width: "222px" }}
+                      >
+                        {cityOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+              </div>
+              <div>
+                <FormControl error={!!errors["status"]}>
+                  <FormLabel>Status</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="status"
+                    render={({ field }) => (
+                      <Select
+                        native
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        sx={{ width: "222px" }}
+                      >
+                        {statusOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["breed"]}>
+                  <FormLabel>Breed</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="breed"
+                    render={({ field }) => (
+                      <Select
+                        native
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        sx={{ width: "222px" }}
+                      >
+                        {breedOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["dateOfBirth"]}>
+                  <FormLabel>Date of Birth</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="dateOfBirth"
+                    render={({ field }) => (
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                          {...field}
+                          value={field.value || null}
+                          onChange={(value) => field.onChange(value)}
+                          sx={{ width: "222px" }}
+                        />
+                      </LocalizationProvider>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["address"]}>
+                  <FormLabel>Address</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="address"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["address"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                      />
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["township"]}>
+                  <FormLabel>Township</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="township"
+                    render={({ field }) => (
+                      <Select
+                        native
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        sx={{ width: "222px" }}
+                      >
+                        {townshipOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+              </div>
+            </DialogActions>
+          </DialogContent>
+          <DialogActions sx={{ marginRight: "155px" }}>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ backgroundColor: "#54bab9", width: "100px" }}
             >
-              {townshipOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
-          </div>
-        </DialogActions>
-      </DialogContent>
-      <DialogActions sx={{ marginRight: "155px" }}>
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ backgroundColor: "#54bab9", width: "100px" }}
-        >
-          Save
-        </Button>
-        <Button variant="outlined">Cancel</Button>
-      </DialogActions>
-    </form>
+              Save
+            </Button>
+            <Button variant="outlined" onClick={handleClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </form>
+      )}
+    </>
   );
 }

@@ -34,7 +34,7 @@ interface TableProps {
 export default function TableComponent({ data }: TableProps) {
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const handleCheckboxChange = (id: number) => {
+  const handleCheckboxChange = (id) => {
     if (selectedItems.includes(id)) {
       setSelectedItems(selectedItems.filter((item) => item !== id));
     } else {
