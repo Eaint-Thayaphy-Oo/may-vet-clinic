@@ -71,6 +71,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
 
   const {
     control,
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
@@ -108,6 +109,21 @@ export default function Create({ onSubmit }: CreateDialogProps) {
             </DialogContentText>
             <DialogActions>
               <div>
+                {/* <FormControl error={!!errors["id"]}>
+                  <FormLabel>Pet Id</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="id"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["id"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                      />
+                    )}
+                  />
+                </FormControl> */}
                 <FormControl error={!!errors["name"]}>
                   <FormLabel>Pet Name</FormLabel>
                   <Controller
@@ -314,7 +330,6 @@ export default function Create({ onSubmit }: CreateDialogProps) {
               type="submit"
               variant="contained"
               sx={{ backgroundColor: "#54bab9", width: "100px" }}
-              // onClick={handleClose}
             >
               Save
             </Button>

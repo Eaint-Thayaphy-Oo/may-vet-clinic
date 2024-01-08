@@ -59,7 +59,7 @@ const items: patientData[] = [
     gender: "male",
     phone: "56879",
     city: "tarmwae",
-    status: "allery",
+    status: "allergy",
     breed: "golden",
     dateOfBirth: "2018-02-02",
     address: "no.34",

@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { patientData } from "../page";
+import Image from "next/image";
 
 interface TableProps {
   data: patientData[];
@@ -152,7 +153,23 @@ export default function TableComponent({ data }: TableProps) {
                 </TableCell>
                 <TableCell>{d.id}</TableCell>
                 <TableCell>{d.name}</TableCell>
-                <TableCell>{d.status}</TableCell>
+                <TableCell>
+                  {d.status == "allergy" ? (
+                    <Image
+                      src="/images/allergy.png"
+                      alt="allergy"
+                      width={15}
+                      height={15}
+                    />
+                  ) : (
+                    <Image
+                      src="/images/picky eater.png"
+                      alt="picky"
+                      width={15}
+                      height={15}
+                    />
+                  )}
+                </TableCell>
                 <TableCell>{d.pawrent}</TableCell>
                 <TableCell>{d.breed}</TableCell>
                 <TableCell>{d.gender}</TableCell>
