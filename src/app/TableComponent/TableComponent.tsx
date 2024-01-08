@@ -11,40 +11,26 @@ import {
   TableRow,
 } from "@mui/material";
 import React, { useState } from "react";
-import data from "../../Data/data";
-
-type patientData = {
-  id: number;
-  name: string;
-  status: string;
-  pawrent: string;
-  breed: string;
-  gender: string;
-  birth: string;
-  phone: string;
-  address: string;
-  township: string;
-  city: string;
-};
+import { patientData } from "../page";
 
 interface TableProps {
   data: patientData[];
 }
 
 export default function TableComponent({ data }: TableProps) {
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedId, setSelectedId] = useState<string[]>([]);
 
-  const handleCheckboxChange = (id) => {
-    if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter((item) => item !== id));
+  const handleCheckboxChange = (id: string) => {
+    if (selectedId?.includes(id.toString())) {
+      setSelectedId(selectedId.filter((item) => item !== id));
     } else {
-      setSelectedItems([...selectedItems, id]);
+      setSelectedId([...selectedId, id]);
     }
   };
 
   const handleSelectAll = () => {
     const allItemIds = data.map((d) => d.id);
-    setSelectedItems(allItemIds);
+    setSelectedId(allItemIds);
   };
 
   return (
@@ -56,10 +42,9 @@ export default function TableComponent({ data }: TableProps) {
               <TableCell>
                 <Checkbox
                   indeterminate={
-                    selectedItems.length > 0 &&
-                    selectedItems.length < data.length
+                    selectedId.length > 0 && selectedId.length < data.length
                   }
-                  checked={selectedItems.length === data.length}
+                  checked={selectedId.length === data.length}
                   onChange={handleSelectAll}
                 />
               </TableCell>
@@ -161,7 +146,7 @@ export default function TableComponent({ data }: TableProps) {
               <TableRow key={d.id}>
                 <TableCell>
                   <Checkbox
-                    checked={selectedItems.includes(d.id)}
+                    checked={selectedId.includes(d.id)}
                     onChange={() => handleCheckboxChange(d.id)}
                   />
                 </TableCell>

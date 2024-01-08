@@ -17,10 +17,10 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import TableComponent from "@/app/TableComponent/TableComponent";
+import { patientData } from "@/app/page";
 
 interface IFormInput {
-  id: string;
+  id: number;
   name: string;
   pawrent: string;
   gender: string;
@@ -60,9 +60,12 @@ const townshipOptions = [
   { value: "Shan", label: "Shan" },
 ];
 
-export default function Create() {
+interface CreateDialogProps {
+  onSubmit: () => void;
+}
+
+export default function Create({ onSubmit }: CreateDialogProps) {
   const [open, setOpen] = useState(true);
-  const [data, setData] = useState<IFormInput[]>([]);
 
   const {
     control,
@@ -72,12 +75,6 @@ export default function Create() {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    // console.log(data);
-    setData((prevData) => [...prevData, data]);
-    handleClose();
   };
 
   return (

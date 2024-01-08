@@ -5,6 +5,7 @@ import styles from "./Header.module.css";
 import { Button, Dialog, TextField } from "@mui/material";
 import { CiSearch } from "react-icons/ci";
 import Create from "@/components/Dialog/Create";
+import { SubmitHandler } from "react-hook-form";
 
 const status = [
   { value: "all", label: "Status All" },
@@ -25,15 +26,19 @@ const rows = [
   { value: "10", label: "10" },
 ];
 
-export default function header() {
-  const [open, setOpen] = useState(false);
+interface HeaderProps {
+  onSubmit: SubmitHandler<IFormInput>;
+}
+
+export default function header({ onSubmit }: HeaderProps) {
+  const [openCreateDialog, setOpenCreateDialog] = useState<boolean>(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenCreateDialog(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenCreateDialog(false);
   };
 
   return (
@@ -138,8 +143,8 @@ export default function header() {
                 ))}
               </TextField>
             </h4>
-            <Dialog open={open} onClose={handleClose}>
-              <Create />
+            <Dialog open={openCreateDialog} onClose={handleClose}>
+              <Create onSubmit={onSubmit} />
             </Dialog>
           </div>
         </div>
