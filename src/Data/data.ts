@@ -5,7 +5,7 @@ type patientData = {
   pawrent: string;
   breed: string;
   gender: string;
-  dateOfBirth: string;
+  dateOfBirth: string | Date | null;
   phone: string;
   address: string;
   township: string;

@@ -35,7 +35,7 @@ interface IFormInput {
   city: string;
   status: string;
   breed: string;
-  dateOfBirth: string;
+  dateOfBirth: string | Date | null;
   address: string;
   township: string;
 }

@@ -27,7 +27,7 @@ interface IFormInput {
   city: string;
   status: string;
   breed: string;
-  dateOfBirth: string;
+  dateOfBirth: string | Date | null;
   address: string;
   township: string;
 }
@@ -314,6 +314,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
               type="submit"
               variant="contained"
               sx={{ backgroundColor: "#54bab9", width: "100px" }}
+              // onClick={handleClose}
             >
               Save
             </Button>
