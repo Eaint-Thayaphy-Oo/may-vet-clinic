@@ -8,13 +8,13 @@ import items from "../Data/data";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export type patientData = {
-  id: number;
+  id:number
   name: string;
   status: string;
   pawrent: string;
   breed: string;
   gender: string;
-  birth: string;
+  dateOfBirth: Date|string|null;
   phone: string;
   address: string;
   township?: string;
@@ -30,7 +30,7 @@ interface IFormInput {
   city: string;
   status: string;
   breed: string;
-  dateOfBirth: Date | string |null;
+  dateOfBirth: string;
   address: string;
   township: string;
 }
@@ -49,11 +49,7 @@ export default function Home() {
     setOpen(false);
   };
 
-  // const onSubmit = (data: patientData) => {
-  //   console.log("created data", data);
-  // };
-
-   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     // console.log(data);
     setData((prevData) => [...prevData, data]);
     handleClose();

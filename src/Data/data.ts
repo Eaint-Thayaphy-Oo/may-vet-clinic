@@ -5,7 +5,7 @@ type patientData = {
   pawrent: string;
   breed: string;
   gender: string;
-  birth: string;
+  dateOfBirth: string;
   phone: string;
   address: string;
   township: string;
@@ -20,7 +20,7 @@ const items: patientData[] = [
     pawrent: "NayChi",
     breed: "spaniel",
     gender: "female",
-    birth: "2016-04-01",
+    dateOfBirth: "2016-04-01",
     phone: "12345",
     address: "no15",
     township: "shan",
@@ -33,7 +33,7 @@ const items: patientData[] = [
     pawrent: "kyaw kyaw",
     breed: "golden",
     gender: "male",
-    birth: "2020-01-09",
+    dateOfBirth: "2020-01-09",
     phone: "125456",
     address: "no12",
     township: "mandalay",
@@ -48,7 +48,7 @@ const items: patientData[] = [
     city: "yangon",
     status: "picky",
     breed: "breed",
-    birth: "2023-11-20",
+    dateOfBirth: "2023-11-20",
     address: "no.56",
     township: "yangon",
   },
@@ -61,7 +61,7 @@ const items: patientData[] = [
     city: "tarmwae",
     status: "allery",
     breed: "golden",
-    birth: "2018-02-02",
+    dateOfBirth: "2018-02-02",
     address: "no.34",
     township: "yangon",
   },
@@ -74,7 +74,7 @@ const items: patientData[] = [
     city: "insein",
     status: "picky",
     breed: "spaniel",
-    birth: "2015-03-23",
+    dateOfBirth: "2015-03-23",
     address: "no.7",
     township: "yangon",
   },

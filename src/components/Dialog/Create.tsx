@@ -17,7 +17,6 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { patientData } from "@/app/page";
 
 interface IFormInput {
   id: number;
@@ -28,7 +27,7 @@ interface IFormInput {
   city: string;
   status: string;
   breed: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   address: string;
   township: string;
 }
@@ -60,8 +59,11 @@ const townshipOptions = [
   { value: "Shan", label: "Shan" },
 ];
 
+// interface CreateDialogProps {
+//   onSubmit: () => void;
+// }
 interface CreateDialogProps {
-  onSubmit: () => void;
+  onSubmit: SubmitHandler<IFormInput>;
 }
 
 export default function Create({ onSubmit }: CreateDialogProps) {
@@ -258,7 +260,9 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                         <DatePicker
                           {...field}
                           value={field.value || null}
-                          onChange={(value) => field.onChange(value)}
+                          onChange={(value) =>
+                            field.onChange(value?.toString())
+                          }
                           sx={{ width: "222px" }}
                         />
                       </LocalizationProvider>

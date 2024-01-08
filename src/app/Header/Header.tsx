@@ -26,6 +26,20 @@ const rows = [
   { value: "10", label: "10" },
 ];
 
+interface IFormInput {
+  id: number;
+  name: string;
+  pawrent: string;
+  gender: string;
+  phone: number;
+  city: string;
+  status: string;
+  breed: string;
+  dateOfBirth: string;
+  address: string;
+  township: string;
+}
+
 interface HeaderProps {
   onSubmit: SubmitHandler<IFormInput>;
 }

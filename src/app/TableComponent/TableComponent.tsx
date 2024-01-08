@@ -156,7 +156,7 @@ export default function TableComponent({ data }: TableProps) {
                 <TableCell>{d.pawrent}</TableCell>
                 <TableCell>{d.breed}</TableCell>
                 <TableCell>{d.gender}</TableCell>
-                <TableCell>{d.birth}</TableCell>
+                <TableCell>{d.dateOfBirth}</TableCell>
                 <TableCell>{d.phone}</TableCell>
                 <TableCell>
                   {d.address},{d.city},{d.township}.
