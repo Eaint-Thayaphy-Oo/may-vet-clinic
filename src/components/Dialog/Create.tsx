@@ -17,6 +17,8 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { RxCross1 } from "react-icons/rx";
+import styles from "./dialog.module.css";
 
 interface IFormInput {
   id: number;
@@ -64,6 +66,7 @@ const townshipOptions = [
 // }
 interface CreateDialogProps {
   onSubmit: SubmitHandler<IFormInput>;
+  handleClose: () => void;
 }
 
 export default function Create({ onSubmit }: CreateDialogProps) {
@@ -76,7 +79,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const handleClose = () => {
+  const handleCancel = () => {
     setOpen(false);
   };
 
@@ -84,6 +87,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
     <>
       {open && (
         <form onSubmit={handleSubmit(onSubmit)}>
+          <RxCross1 className={styles.icon} onClick={handleCancel} />
           <DialogTitle
             sx={{
               color: "#54bab9",
@@ -109,21 +113,6 @@ export default function Create({ onSubmit }: CreateDialogProps) {
             </DialogContentText>
             <DialogActions>
               <div>
-                {/* <FormControl error={!!errors["id"]}>
-                  <FormLabel>Pet Id</FormLabel>
-                  <Controller
-                    control={control}
-                    rules={{ required: true }}
-                    name="id"
-                    render={({ field }) => (
-                      <OutlinedInput
-                        error={!!errors["id"]}
-                        value={field.value || ""}
-                        onChange={(e) => field.onChange(e.target.value)}
-                      />
-                    )}
-                  />
-                </FormControl> */}
                 <FormControl error={!!errors["name"]}>
                   <FormLabel>Pet Name</FormLabel>
                   <Controller
@@ -325,7 +314,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
               </div>
             </DialogActions>
           </DialogContent>
-          <DialogActions sx={{ marginRight: "220px" }}>
+          <DialogActions sx={{ marginRight: "205px" }}>
             <Button
               type="submit"
               variant="contained"
@@ -333,7 +322,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
             >
               Save
             </Button>
-            <Button variant="outlined" onClick={handleClose}>
+            <Button variant="outlined" onClick={handleCancel}>
               Cancel
             </Button>
           </DialogActions>

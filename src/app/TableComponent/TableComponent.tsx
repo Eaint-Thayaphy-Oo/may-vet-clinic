@@ -13,6 +13,9 @@ import {
 import React, { useState } from "react";
 import { patientData } from "../page";
 import Image from "next/image";
+import { AiOutlineMore } from "react-icons/ai";
+import { LuPencil } from "react-icons/lu";
+import { FiTrash } from "react-icons/fi";
 
 interface TableProps {
   data: patientData[];
@@ -20,6 +23,7 @@ interface TableProps {
 
 export default function TableComponent({ data }: TableProps) {
   const [selectedId, setSelectedId] = useState<string[]>([]);
+  const [showDropDown, setShowDropDown] = useState();
 
   const handleCheckboxChange = (id: string) => {
     if (selectedId?.includes(id.toString())) {
@@ -32,6 +36,14 @@ export default function TableComponent({ data }: TableProps) {
   const handleSelectAll = () => {
     const allItemIds = data.map((d) => d.id);
     setSelectedId(allItemIds);
+  };
+
+  const handleOpenModal = (id) => {
+    if (id == showDropDown) {
+      setShowDropDown(null);
+    } else {
+      setShowDropDown(id);
+    }
   };
 
   return (
@@ -177,6 +189,22 @@ export default function TableComponent({ data }: TableProps) {
                 <TableCell>{d.phone}</TableCell>
                 <TableCell>
                   {d.address},{d.city},{d.township}.
+                </TableCell>
+                <TableCell onClick={() => handleOpenModal(d?.id)}>
+                  <AiOutlineMore />
+                  {showDropDown === d?.id && (
+                    <div>
+                      <button>
+                        <LuPencil />
+                        Edit
+                      </button>
+                      <br />
+                      <button>
+                        <FiTrash />
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

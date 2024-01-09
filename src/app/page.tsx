@@ -61,7 +61,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <Header onSubmit={onSubmit} />
+      {open && <Header onSubmit={onSubmit} handleClose={handleClose} />}
       <TableComponent data={data} />
     </>
   );

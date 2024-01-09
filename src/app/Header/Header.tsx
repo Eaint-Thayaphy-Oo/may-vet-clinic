@@ -42,6 +42,7 @@ interface IFormInput {
 
 interface HeaderProps {
   onSubmit: SubmitHandler<IFormInput>;
+  handleClose: () => void;
 }
 
 export default function header({ onSubmit }: HeaderProps) {
@@ -158,7 +159,7 @@ export default function header({ onSubmit }: HeaderProps) {
               </TextField>
             </h4>
             <Dialog open={openCreateDialog} onClose={handleClose}>
-              <Create onSubmit={onSubmit} />
+              <Create onSubmit={onSubmit} handleClose={handleClose} />
             </Dialog>
           </div>
         </div>
