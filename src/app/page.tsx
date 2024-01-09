@@ -52,17 +52,25 @@ export default function Home() {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     // console.log(data);
+    //create item
     const newItem = { ...data, id: idCounter };
     setData((prevData) => [...prevData, newItem]);
     setIdCounter((prevId) => prevId + 1);
     handleClose();
   };
 
+  //remove item
+  const removeItemHandler = (id) => {
+    console.log(id);
+    let remainUsers = data.filter((d) => d.id != id);
+    setData(remainUsers);
+  };
+
   return (
     <>
       <Nav />
       {open && <Header onSubmit={onSubmit} handleClose={handleClose} />}
-      <TableComponent data={data} />
+      <TableComponent data={data} remove={removeItemHandler} />
     </>
   );
 }

@@ -21,10 +21,11 @@ interface TableProps {
   data: patientData[];
 }
 
-export default function TableComponent({ data }: TableProps) {
+export default function TableComponent({ data, remove }: TableProps) {
   const [selectedId, setSelectedId] = useState<string[]>([]);
   const [showDropDown, setShowDropDown] = useState();
 
+  //select checkbox
   const handleCheckboxChange = (id: string) => {
     if (selectedId?.includes(id.toString())) {
       setSelectedId(selectedId.filter((item) => item !== id));
@@ -38,12 +39,18 @@ export default function TableComponent({ data }: TableProps) {
     setSelectedId(allItemIds);
   };
 
+  //handleopen model for edit and delete
   const handleOpenModal = (id) => {
     if (id == showDropDown) {
       setShowDropDown(null);
     } else {
       setShowDropDown(id);
     }
+  };
+
+  //delete for item
+  const handleRemove = (id) => {
+    remove(id);
   };
 
   return (
@@ -199,7 +206,7 @@ export default function TableComponent({ data }: TableProps) {
                         Edit
                       </button>
                       <br />
-                      <button>
+                      <button onClick={() => handleRemove(d.id)}>
                         <FiTrash />
                         Delete
                       </button>
