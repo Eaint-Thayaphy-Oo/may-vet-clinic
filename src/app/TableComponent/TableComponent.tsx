@@ -2,6 +2,7 @@
 
 import {
   Checkbox,
+  Dialog,
   Paper,
   Table,
   TableBody,
@@ -16,14 +17,18 @@ import Image from "next/image";
 import { AiOutlineMore } from "react-icons/ai";
 import { LuPencil } from "react-icons/lu";
 import { FiTrash } from "react-icons/fi";
+import styles from "./table.module.css";
+import Edit from "../../components/Dialog/Edit";
 
 interface TableProps {
   data: patientData[];
+  remove: (id: number) => void;
 }
 
-export default function TableComponent({ data, remove }: TableProps) {
+export default function TableComponent({ data, remove, onSubmit }: TableProps) {
   const [selectedId, setSelectedId] = useState<string[]>([]);
   const [showDropDown, setShowDropDown] = useState();
+  const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
 
   //select checkbox
   const handleCheckboxChange = (id: string) => {
@@ -51,6 +56,15 @@ export default function TableComponent({ data, remove }: TableProps) {
   //delete for item
   const handleRemove = (id) => {
     remove(id);
+  };
+
+  //edit dialog box
+  const handleClickOpen = () => {
+    setOpenEditDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpenEditDialog(false);
   };
 
   return (
@@ -200,14 +214,20 @@ export default function TableComponent({ data, remove }: TableProps) {
                 <TableCell onClick={() => handleOpenModal(d?.id)}>
                   <AiOutlineMore />
                   {showDropDown === d?.id && (
-                    <div>
-                      <button>
-                        <LuPencil />
+                    <div className={styles.modal}>
+                      <button
+                        className={styles.button}
+                        onClick={handleClickOpen}
+                      >
+                        <LuPencil className={styles.pencil} />
                         Edit
                       </button>
                       <br />
-                      <button onClick={() => handleRemove(d.id)}>
-                        <FiTrash />
+                      <button
+                        onClick={() => handleRemove(d.id)}
+                        className={styles.button}
+                      >
+                        <FiTrash className={styles.delete} />
                         Delete
                       </button>
                     </div>
@@ -216,6 +236,9 @@ export default function TableComponent({ data, remove }: TableProps) {
               </TableRow>
             ))}
           </TableBody>
+          <Dialog open={openEditDialog} onClose={handleClose}>
+            <Edit onSubmit={onSubmit} handleClose={handleClose} />
+          </Dialog>
         </Table>
       </TableContainer>
     </>

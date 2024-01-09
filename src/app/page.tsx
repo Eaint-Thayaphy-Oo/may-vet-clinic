@@ -61,7 +61,7 @@ export default function Home() {
 
   //remove item
   const removeItemHandler = (id) => {
-    console.log(id);
+    // console.log(id);
     let remainUsers = data.filter((d) => d.id != id);
     setData(remainUsers);
   };
