@@ -19,6 +19,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { RxCross1 } from "react-icons/rx";
 import styles from "./dialog.module.css";
+import dayjs from "dayjs";
 
 interface IFormInput {
   id: number;
@@ -265,7 +266,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                           {...field}
-                          value={field.value || null}
+                          value={dayjs(field.value) || null}
                           onChange={(value) =>
                             field.onChange(value?.toString())
                           }

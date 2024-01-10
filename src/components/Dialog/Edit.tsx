@@ -12,33 +12,17 @@ import {
   RadioGroup,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { RxCross1 } from "react-icons/rx";
+import styles from "./dialog.module.css";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { RxCross1 } from "react-icons/rx";
-import styles from "./dialog.module.css";
-
-interface IFormInput {
-  id: number;
-  name: string;
-  pawrent: string;
-  gender: string;
-  phone: number;
-  city: string;
-  status: string;
-  breed: string;
-  dateOfBirth: string | Date | null;
-  address: string;
-  township: string;
-}
-
-const statusOptions = [
-  { value: "all", label: "please choose status" },
-  { value: "allergy", label: "Allergy" },
-  { value: "picky", label: "Picky Eater" },
-];
+import "react-datepicker/dist/react-datepicker.css";
+import dayjs from "dayjs";
+import { IFormInput } from "@/type/type";
+import statusOptions from "@/type/type";
 
 const breedOptions = [
   { value: "all", label: "please choose breed" },
@@ -67,21 +51,57 @@ const townshipOptions = [
 interface EditDialogProps {
   onSubmit: SubmitHandler<IFormInput>;
   handleClose: () => void;
+  editItem: IFormInput;
+  // dateOfBirth: string | Date | null;
+  update: (editItem: IFormInput, formData: any) => void;
 }
 
-export default function Edit({ onSubmit }: EditDialogProps) {
+export default function Edit({
+  onSubmit,
+  handleClose,
+  editItem,
+  update,
+}: EditDialogProps) {
   const [open, setOpen] = useState(true);
 
   const {
     control,
-    register,
+    setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({
+    defaultValues: { ...editItem },
+  });
 
   //cancel button
   const handleCancel = () => {
     setOpen(false);
+  };
+
+  //update form
+  useEffect(() => {
+    if (editItem.id) {
+      setValue("name", editItem.name || "");
+      setValue("pawrent", editItem.pawrent || "");
+      setValue("gender", editItem.gender || "");
+      setValue("phone", editItem.phone || "");
+      setValue("city", editItem.city || "");
+      setValue("status", editItem.status || "");
+      setValue("breed", editItem.breed || "");
+      setValue("dateOfBirth", editItem.dateOfBirth || "");
+      setValue("address", editItem.address || "");
+      setValue("township", editItem.township || "");
+    }
+  }, [editItem, setValue]);
+
+  const handleUpdate = async () => {
+    try {
+      const formData = await handleSubmit(onSubmit)();
+      update(editItem, formData);
+      handleClose();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -265,7 +285,7 @@ export default function Edit({ onSubmit }: EditDialogProps) {
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                           {...field}
-                          value={field.value || null}
+                          value={dayjs(field.value) || null}
                           onChange={(value) =>
                             field.onChange(value?.toString())
                           }
@@ -320,6 +340,7 @@ export default function Edit({ onSubmit }: EditDialogProps) {
               type="submit"
               variant="contained"
               sx={{ backgroundColor: "#EDC339", width: "100px" }}
+              onClick={() => handleUpdate}
             >
               Update
             </Button>

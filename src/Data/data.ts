@@ -1,16 +1,4 @@
-type patientData = {
-  id: number;
-  name: string;
-  status: string;
-  pawrent: string;
-  breed: string;
-  gender: string;
-  dateOfBirth: string | Date | null;
-  phone: string;
-  address: string;
-  township: string;
-  city: string;
-};
+import { patientData } from "@/app/page";
 
 const items: patientData[] = [
   {

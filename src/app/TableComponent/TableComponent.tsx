@@ -12,23 +12,34 @@ import {
   TableRow,
 } from "@mui/material";
 import React, { useState } from "react";
-import { patientData } from "../page";
 import Image from "next/image";
 import { AiOutlineMore } from "react-icons/ai";
 import { LuPencil } from "react-icons/lu";
 import { FiTrash } from "react-icons/fi";
 import styles from "./table.module.css";
 import Edit from "../../components/Dialog/Edit";
+import { patientData, IFormInput } from "@/type/type";
+import { SubmitHandler } from "react-hook-form";
 
 interface TableProps {
   data: patientData[];
   remove: (id: number) => void;
+  onSubmit: SubmitHandler<IFormInput>;
+  editItem: IFormInput | null;
+  update: (editItem: IFormInput, formData: any) => void;
+  editModal: boolean;
 }
 
-export default function TableComponent({ data, remove, onSubmit }: TableProps) {
+export default function TableComponent({
+  data,
+  remove,
+  onSubmit,
+  update,
+}: TableProps) {
   const [selectedId, setSelectedId] = useState<string[]>([]);
-  const [showDropDown, setShowDropDown] = useState();
+  const [showDropDown, setShowDropDown] = useState<number | null>(null);
   const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
+  const [editItem, setEditItem] = useState<IFormInput | null>(null);
 
   //select checkbox
   const handleCheckboxChange = (id: string) => {
@@ -40,12 +51,12 @@ export default function TableComponent({ data, remove, onSubmit }: TableProps) {
   };
 
   const handleSelectAll = () => {
-    const allItemIds = data.map((d) => d.id);
+    const allItemIds = data.map((d) => d.id.toString());
     setSelectedId(allItemIds);
   };
 
   //handleopen model for edit and delete
-  const handleOpenModal = (id) => {
+  const handleOpenModal = (id: number) => {
     if (id == showDropDown) {
       setShowDropDown(null);
     } else {
@@ -54,12 +65,14 @@ export default function TableComponent({ data, remove, onSubmit }: TableProps) {
   };
 
   //delete for item
-  const handleRemove = (id) => {
+  const handleRemove = (id: number) => {
     remove(id);
   };
 
   //edit dialog box
-  const handleClickOpen = () => {
+  const handleClickOpen = (id: number) => {
+    const itemToEdit = data.find((item) => item.id === id);
+    setEditItem(itemToEdit);
     setOpenEditDialog(true);
   };
 
@@ -180,8 +193,8 @@ export default function TableComponent({ data, remove, onSubmit }: TableProps) {
               <TableRow key={d.id}>
                 <TableCell>
                   <Checkbox
-                    checked={selectedId.includes(d.id)}
-                    onChange={() => handleCheckboxChange(d.id)}
+                    checked={selectedId.includes(d.id.toString())}
+                    onChange={() => handleCheckboxChange(d.id.toString())}
                   />
                 </TableCell>
                 <TableCell>{d.id}</TableCell>
@@ -217,7 +230,7 @@ export default function TableComponent({ data, remove, onSubmit }: TableProps) {
                     <div className={styles.modal}>
                       <button
                         className={styles.button}
-                        onClick={handleClickOpen}
+                        onClick={() => handleClickOpen(d.id)}
                       >
                         <LuPencil className={styles.pencil} />
                         Edit
@@ -236,9 +249,23 @@ export default function TableComponent({ data, remove, onSubmit }: TableProps) {
               </TableRow>
             ))}
           </TableBody>
-          <Dialog open={openEditDialog} onClose={handleClose}>
-            <Edit onSubmit={onSubmit} handleClose={handleClose} />
-          </Dialog>
+          {/* <Dialog open={openEditDialog} onClose={handleClose}>
+            <Edit
+              onSubmit={onSubmit}
+              handleClose={handleClose}
+              editItem={editItem}
+            />
+          </Dialog> */}
+          {editItem && (
+            <Dialog open={openEditDialog} onClose={handleClose}>
+              <Edit
+                onSubmit={onSubmit}
+                handleClose={handleClose}
+                editItem={editItem}
+                update={update}
+              />
+            </Dialog>
+          )}
         </Table>
       </TableContainer>
     </>
