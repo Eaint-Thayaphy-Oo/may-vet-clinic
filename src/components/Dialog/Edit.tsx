@@ -11,9 +11,8 @@ import {
   Radio,
   RadioGroup,
   Select,
-  Dialog,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { RxCross1 } from "react-icons/rx";
 import styles from "./dialog.module.css";
@@ -23,44 +22,23 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "react-datepicker/dist/react-datepicker.css";
 import dayjs from "dayjs";
 import { IFormInput, patientData } from "@/type/type";
-import statusOptions from "@/type/type";
+import { statusOptions } from "@/type/type";
+import { breedOptions } from "@/type/type";
+import { cityOptions } from "@/type/type";
+import { townshipOptions } from "@/type/type";
 
-const breedOptions = [
-  { value: "all", label: "please choose breed" },
-  { value: "beagle", label: "Beagle" },
-  { value: "spaniel", label: "Spaniel" },
-  { value: "golden", label: "Golden Retriever" },
-];
-
-const cityOptions = [
-  { value: "all", label: "please choose city" },
-  { value: "yangon", label: "Yangon" },
-  { value: "insein", label: "Insein" },
-  { value: "tarmwae", label: "Tarmwae" },
-];
-
-const townshipOptions = [
-  { value: "all", label: "please choose township" },
-  { value: "yangon", label: "Yangon" },
-  { value: "mandalay", label: "Mandalay" },
-  { value: "Shan", label: "Shan" },
-];
-
-// interface CreateDialogProps {
-//   onSubmit: () => void;
-// }
 interface EditDialogProps {
   onSubmit: SubmitHandler<IFormInput>;
   handleClose: () => void;
   editItem: patientData;
-  // dateOfBirth: string | Date | null;
-  // update: (editItem: patientData, formData: any) => void;
   editModal: boolean;
+  handleCloseEdit: () => void;
 }
 
 export default function Edit({
   onSubmit,
   editItem,
+  handleCloseEdit,
 }: EditDialogProps) {
   const {
     control,
@@ -70,11 +48,6 @@ export default function Edit({
   } = useForm<IFormInput>({
     defaultValues: { ...editItem },
   });
-
-  //cancel button
-  const handleCancel = () => {
-    setOpen(false);
-  };
 
   //update form
   useEffect(() => {
@@ -95,7 +68,7 @@ export default function Edit({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <RxCross1 className={styles.icon} onClick={handleCancel} />
+        <RxCross1 className={styles.icon} onClick={handleCloseEdit} />
         <DialogTitle
           sx={{
             color: "#54bab9",
@@ -127,12 +100,12 @@ export default function Edit({
                   control={control}
                   rules={{ required: true }}
                   name="name"
-                  defaultValue={editItem.name}
                   render={({ field }) => (
                     <OutlinedInput
                       error={!!errors["name"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
+                      style={{ height: "50px" }}
                     />
                   )}
                 />
@@ -148,6 +121,7 @@ export default function Edit({
                       error={!!errors["pawrent"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
+                      style={{ height: "50px" }}
                     />
                   )}
                 />
@@ -191,6 +165,7 @@ export default function Edit({
                       error={!!errors["phone"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
+                      style={{ height: "50px" }}
                     />
                   )}
                 />
@@ -206,7 +181,7 @@ export default function Edit({
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px" }}
+                      sx={{ width: "222px", height: "50px" }}
                     >
                       {cityOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -230,7 +205,7 @@ export default function Edit({
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px" }}
+                      sx={{ width: "222px", height: "50px" }}
                     >
                       {statusOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -252,7 +227,7 @@ export default function Edit({
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px" }}
+                      sx={{ width: "222px", height: "50px" }}
                     >
                       {breedOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -275,7 +250,7 @@ export default function Edit({
                         {...field}
                         value={dayjs(field.value) || null}
                         onChange={(value) => field.onChange(value?.toString())}
-                        sx={{ width: "222px" }}
+                        sx={{ width: "222px", height: "50px" }}
                       />
                     </LocalizationProvider>
                   )}
@@ -292,6 +267,7 @@ export default function Edit({
                       error={!!errors["address"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
+                      style={{ height: "50px" }}
                     />
                   )}
                 />
@@ -307,7 +283,7 @@ export default function Edit({
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px" }}
+                      sx={{ width: "222px", height: "50px" }}
                     >
                       {townshipOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -321,7 +297,7 @@ export default function Edit({
             </div>
           </DialogActions>
         </DialogContent>
-        <DialogActions sx={{ marginRight: "205px" }}>
+        <DialogActions sx={{ marginRight: "220px" }}>
           <Button
             type="submit"
             variant="contained"
@@ -330,7 +306,7 @@ export default function Edit({
           >
             Update
           </Button>
-          <Button variant="outlined" onClick={handleCancel}>
+          <Button variant="outlined" onClick={handleCloseEdit}>
             Cancel
           </Button>
         </DialogActions>

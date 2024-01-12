@@ -12,7 +12,7 @@ import {
   RadioGroup,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -20,73 +20,28 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { RxCross1 } from "react-icons/rx";
 import styles from "./dialog.module.css";
 import dayjs from "dayjs";
+import { IFormInput } from "@/type/type";
+import { statusOptions } from "@/type/type";
+import { breedOptions } from "@/type/type";
+import { cityOptions } from "@/type/type";
+import { townshipOptions } from "@/type/type";
 
-interface IFormInput {
-  id: number;
-  name: string;
-  pawrent: string;
-  gender: string;
-  phone: number;
-  city: string;
-  status: string;
-  breed: string;
-  dateOfBirth: string | Date | null;
-  address: string;
-  township: string;
-}
-
-const statusOptions = [
-  { value: "all", label: "please choose status" },
-  { value: "allergy", label: "Allergy" },
-  { value: "picky", label: "Picky Eater" },
-];
-
-const breedOptions = [
-  { value: "all", label: "please choose breed" },
-  { value: "beagle", label: "Beagle" },
-  { value: "spaniel", label: "Spaniel" },
-  { value: "golden", label: "Golden Retriever" },
-];
-
-const cityOptions = [
-  { value: "all", label: "please choose city" },
-  { value: "yangon", label: "Yangon" },
-  { value: "insein", label: "Insein" },
-  { value: "tarmwae", label: "Tarmwae" },
-];
-
-const townshipOptions = [
-  { value: "all", label: "please choose township" },
-  { value: "yangon", label: "Yangon" },
-  { value: "mandalay", label: "Mandalay" },
-  { value: "Shan", label: "Shan" },
-];
-
-// interface CreateDialogProps {
-//   onSubmit: () => void;
-// }
 interface CreateDialogProps {
   onSubmit: SubmitHandler<IFormInput>;
   handleClose: () => void;
 }
 
-export default function Create({ onSubmit }: CreateDialogProps) {
+export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
   const {
     control,
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
 
-  //cancel button
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <RxCross1 className={styles.icon} onClick={handleCancel} />
+        <RxCross1 className={styles.icon} onClick={handleClose} />
         <DialogTitle
           sx={{
             color: "#54bab9",
@@ -123,6 +78,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       error={!!errors["name"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
+                      style={{ height: "50px" }}
                     />
                   )}
                 />
@@ -138,6 +94,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       error={!!errors["pawrent"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
+                      style={{ height: "50px" }}
                     />
                   )}
                 />
@@ -181,6 +138,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       error={!!errors["phone"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
+                      style={{ height: "50px" }}
                     />
                   )}
                 />
@@ -196,7 +154,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px" }}
+                      sx={{ width: "222px", height: "50px" }}
                     >
                       {cityOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -220,7 +178,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px" }}
+                      sx={{ width: "222px", height: "50px" }}
                     >
                       {statusOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -242,7 +200,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px" }}
+                      sx={{ width: "222px", height: "50px" }}
                     >
                       {breedOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -265,7 +223,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                         {...field}
                         value={dayjs(field.value) || null}
                         onChange={(value) => field.onChange(value?.toString())}
-                        sx={{ width: "222px" }}
+                        sx={{ width: "222px", height: "50px" }}
                       />
                     </LocalizationProvider>
                   )}
@@ -282,6 +240,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       error={!!errors["address"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
+                      style={{ height: "50px" }}
                     />
                   )}
                 />
@@ -297,7 +256,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px" }}
+                      sx={{ width: "222px", height: "50px" }}
                     >
                       {townshipOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -311,7 +270,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
             </div>
           </DialogActions>
         </DialogContent>
-        <DialogActions sx={{ marginRight: "205px" }}>
+        <DialogActions sx={{ marginRight: "220px" }}>
           <Button
             type="submit"
             variant="contained"
@@ -319,7 +278,7 @@ export default function Create({ onSubmit }: CreateDialogProps) {
           >
             Save
           </Button>
-          <Button variant="outlined" onClick={handleCancel}>
+          <Button variant="outlined" onClick={handleClose}>
             Cancel
           </Button>
         </DialogActions>

@@ -1,61 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Header.module.css";
 import { Button, Dialog, TextField } from "@mui/material";
 import { CiSearch } from "react-icons/ci";
 import Create from "@/components/Dialog/Create";
 import { SubmitHandler } from "react-hook-form";
-
-const status = [
-  { value: "all", label: "Status All" },
-  { value: "allergy", label: "Allergy" },
-  { value: "picky", label: "Picky Eater" },
-];
-
-const breed = [
-  { value: "all", label: "Breed All" },
-  { value: "beagle", label: "Beagle" },
-  { value: "spaniel", label: "Spaniel" },
-  { value: "golden", label: "Golden Retriever" },
-];
-
-const rows = [
-  { value: "3", label: "3" },
-  { value: "5", label: "5" },
-  { value: "10", label: "10" },
-];
-
-interface IFormInput {
-  id: number;
-  name: string;
-  pawrent: string;
-  gender: string;
-  phone: number;
-  city: string;
-  status: string;
-  breed: string;
-  dateOfBirth: string | Date | null;
-  address: string;
-  township: string;
-}
+import { IFormInput } from "@/type/type";
+import { status } from "@/type/type";
+import { breed } from "@/type/type";
+import { rows } from "@/type/type";
 
 interface HeaderProps {
   onSubmit: SubmitHandler<IFormInput>;
   handleClose: () => void;
+  createModal: boolean;
+  handleClickOpen: () => void;
 }
 
-export default function header({ onSubmit }: HeaderProps) {
-  const [openCreateDialog, setOpenCreateDialog] = useState<boolean>(false);
-
-  const handleClickOpen = () => {
-    setOpenCreateDialog(true);
-  };
-
-  const handleClose = () => {
-    setOpenCreateDialog(false);
-  };
-
+export default function header({
+  onSubmit,
+  createModal,
+  handleClickOpen,
+  handleClose,
+}: HeaderProps) {
   return (
     <>
       <div className={styles.container}>
@@ -71,7 +39,7 @@ export default function header({ onSubmit }: HeaderProps) {
                   style: {
                     borderRadius: "20px",
                     border: "1px solid rgba(68, 68, 68, 0.5)",
-                    height: "50px",
+                    height: "40px",
                   },
                 }}
               />
@@ -86,7 +54,7 @@ export default function header({ onSubmit }: HeaderProps) {
                   native: true,
                   sx: {
                     borderRadius: "15px",
-                    height: "50px",
+                    height: "40px",
                     width: "115px",
                   },
                 }}
@@ -106,7 +74,7 @@ export default function header({ onSubmit }: HeaderProps) {
                   native: true,
                   sx: {
                     borderRadius: "15px",
-                    height: "50px",
+                    height: "40px",
                     width: "110px",
                     marginLeft: "3px",
                   },
@@ -158,9 +126,11 @@ export default function header({ onSubmit }: HeaderProps) {
                 ))}
               </TextField>
             </h4>
-            <Dialog open={openCreateDialog} onClose={handleClose}>
-              <Create onSubmit={onSubmit} handleClose={handleClose} />
-            </Dialog>
+            {createModal && (
+              <Dialog open={createModal} onClose={handleClose}>
+                <Create onSubmit={onSubmit} handleClose={handleClose} />
+              </Dialog>
+            )}
           </div>
         </div>
       </div>

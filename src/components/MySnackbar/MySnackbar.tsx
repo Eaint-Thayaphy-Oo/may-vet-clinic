@@ -6,17 +6,32 @@ interface SnackbarProps {
   message: string;
   open: boolean;
   autoHideDuration: number;
-  onClose: () => void;
 }
 
-const MySnackbar: React.FC<SnackbarProps> = ({ message, open, onClose }) => {
+const MySnackbar: React.FC<SnackbarProps> = ({ message, open }) => {
+  const [alert, setAlert] = useState<boolean>(true);
+
+  const handleCloseAlert = () => {
+    setAlert(false);
+  };
   return (
     <Stack>
-      <Snackbar open={open} autoHideDuration={6000} onClose={onClose}>
-        <Alert onClose={onClose} severity="success" sx={{ width: "100%" }}>
-          {message}
-        </Alert>
-      </Snackbar>
+      {alert && (
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleCloseAlert}
+        >
+          <Alert
+            onClose={handleCloseAlert}
+            variant="filled"
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {message}
+          </Alert>
+        </Snackbar>
+      )}
     </Stack>
   );
 };

@@ -28,6 +28,7 @@ interface TableProps {
   editItem?: IFormInput | null;
   update?: (editItem: IFormInput, formData: any) => void;
   editModal: boolean;
+  handleCloseEdit: () => void;
 }
 
 export default function TableComponent({
@@ -36,6 +37,7 @@ export default function TableComponent({
   onSubmit,
   update,
   editModal,
+  handleCloseEdit,
 }: TableProps) {
   const [selectedId, setSelectedId] = useState<string[]>([]);
   const [showDropDown, setShowDropDown] = useState<number | null>(null);
@@ -265,6 +267,7 @@ export default function TableComponent({
                 handleClose={handleClose}
                 editItem={editItem}
                 editModal={editModal}
+                handleCloseEdit={handleCloseEdit}
               />
             </Dialog>
           )}

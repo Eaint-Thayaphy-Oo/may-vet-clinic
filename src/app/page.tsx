@@ -11,8 +11,8 @@ import MySnackbar from "@/components/MySnackbar/MySnackbar";
 
 export default function Home() {
   const [data, setData] = useState<patientData[]>(items);
-  const [open, setOpen] = useState(true);
   const [idCounter, setIdCounter] = useState<number>(6);
+  const [createModal, setCreateModal] = useState<boolean>(false);
   const [editModal, setEditModal] = useState<boolean>(true);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
@@ -21,8 +21,19 @@ export default function Home() {
     formState: { errors },
   } = useForm<IFormInput>();
 
+  //create modal open
+  const handleClickOpen = () => {
+    setCreateModal(true);
+  };
+
+  //create cancel
   const handleClose = () => {
-    setOpen(false);
+    setCreateModal(false);
+  };
+
+  //edit cancel
+  const handleCloseEdit = () => {
+    setEditModal(false);
   };
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
@@ -33,7 +44,7 @@ export default function Home() {
     setIdCounter((prevId) => prevId + 1);
     setMessage("Patient is successfully created!");
     setOpenSnackbar(true);
-    // setOpen(false);
+    setCreateModal(false);
     handleClose();
   };
 
@@ -55,7 +66,7 @@ export default function Home() {
         item.city = editItem.city;
         item.status = editItem.status;
         item.breed = editItem.breed;
-        item.birth = editItem.birth;
+        item.dateOfBirth = editItem.dateOfBirth;
         item.address = editItem.address;
         item.township = editItem.township;
         return item;
@@ -69,16 +80,21 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <Header onSubmit={onSubmit} handleClose={handleClose} />
+      <Header
+        onSubmit={onSubmit}
+        handleClose={handleClose}
+        createModal={createModal}
+        handleClickOpen={handleClickOpen}
+      />
       <TableComponent
         data={data}
         remove={removeItemHandler}
         onSubmit={handleOnUpdate}
         editModal={editModal}
+        handleCloseEdit={handleCloseEdit}
       />
       <MySnackbar
         message={message}
-        onClose={handleClose}
         open={openSnackbar}
         autoHideDuration={6000}
       />
