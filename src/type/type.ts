@@ -1,5 +1,5 @@
 export type patientData = {
-  id?: number;
+  id: number;
   name: string;
   status: string;
   pawrent: string;

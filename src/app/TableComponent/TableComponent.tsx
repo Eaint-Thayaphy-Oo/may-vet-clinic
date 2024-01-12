@@ -35,7 +35,6 @@ export default function TableComponent({
   data,
   remove,
   onSubmit,
-  update,
   editModal,
   handleCloseEdit,
 }: TableProps) {
@@ -223,7 +222,7 @@ export default function TableComponent({
                 <TableCell>{d.pawrent}</TableCell>
                 <TableCell>{d.breed}</TableCell>
                 <TableCell>{d.gender}</TableCell>
-                <TableCell>{d.dateOfBirth}</TableCell>
+                <TableCell>{d.dateOfBirth?.toLocaleString()}</TableCell>
                 <TableCell>{d.phone}</TableCell>
                 <TableCell>
                   {d.address},{d.city},{d.township}.
@@ -253,13 +252,6 @@ export default function TableComponent({
               </TableRow>
             ))}
           </TableBody>
-          {/* <Dialog open={openEditDialog} onClose={handleClose}>
-            <Edit
-              onSubmit={onSubmit}
-              handleClose={handleClose}
-              editItem={editItem}
-            />
-          </Dialog> */}
           {editItem && (
             <Dialog open={editModal} onClose={handleClose}>
               <Edit

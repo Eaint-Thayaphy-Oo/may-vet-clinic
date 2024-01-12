@@ -18,7 +18,7 @@ interface HeaderProps {
   handleClickOpen: () => void;
 }
 
-export default function header({
+export default function Header({
   onSubmit,
   createModal,
   handleClickOpen,
