@@ -25,8 +25,8 @@ interface TableProps {
   data: patientData[];
   remove: (id: number) => void;
   onSubmit: SubmitHandler<IFormInput>;
-  editItem: IFormInput | null;
-  update: (editItem: IFormInput, formData: any) => void;
+  editItem?: IFormInput | null;
+  update?: (editItem: IFormInput, formData: any) => void;
   editModal: boolean;
 }
 
@@ -35,11 +35,12 @@ export default function TableComponent({
   remove,
   onSubmit,
   update,
+  editModal,
 }: TableProps) {
   const [selectedId, setSelectedId] = useState<string[]>([]);
   const [showDropDown, setShowDropDown] = useState<number | null>(null);
   const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
-  const [editItem, setEditItem] = useState<IFormInput | null>(null);
+  const [editItem, setEditItem] = useState<patientData>();
 
   //select checkbox
   const handleCheckboxChange = (id: string) => {
@@ -72,6 +73,7 @@ export default function TableComponent({
   //edit dialog box
   const handleClickOpen = (id: number) => {
     const itemToEdit = data.find((item) => item.id === id);
+    console.log("item to edit", itemToEdit);
     setEditItem(itemToEdit);
     setOpenEditDialog(true);
   };
@@ -257,12 +259,12 @@ export default function TableComponent({
             />
           </Dialog> */}
           {editItem && (
-            <Dialog open={openEditDialog} onClose={handleClose}>
+            <Dialog open={editModal} onClose={handleClose}>
               <Edit
                 onSubmit={onSubmit}
                 handleClose={handleClose}
                 editItem={editItem}
-                update={update}
+                editModal={editModal}
               />
             </Dialog>
           )}
