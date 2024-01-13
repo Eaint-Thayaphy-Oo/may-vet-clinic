@@ -20,6 +20,7 @@ import styles from "./table.module.css";
 import Edit from "../../components/Dialog/Edit";
 import { patientData, IFormInput } from "@/type/type";
 import { SubmitHandler } from "react-hook-form";
+import ConfirmationBox from "@/components/ConfirmationBox/ConfirmationBox";
 
 interface TableProps {
   data: patientData[];
@@ -29,6 +30,7 @@ interface TableProps {
   update?: (editItem: IFormInput, formData: any) => void;
   editModal: boolean;
   handleCloseEdit: () => void;
+  deleteModal: boolean;
 }
 
 export default function TableComponent({
@@ -37,11 +39,14 @@ export default function TableComponent({
   onSubmit,
   editModal,
   handleCloseEdit,
+  deleteModal,
 }: TableProps) {
   const [selectedId, setSelectedId] = useState<string[]>([]);
   const [showDropDown, setShowDropDown] = useState<number | null>(null);
-  const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
   const [editItem, setEditItem] = useState<patientData>();
+  const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
+  const [deleteItem, setDeleteItem] = useState<patientData>();
+  const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
 
   //select checkbox
   const handleCheckboxChange = (id: string) => {
@@ -66,21 +71,35 @@ export default function TableComponent({
     }
   };
 
+  //edit dialog box
+  const handleClickOpen = (id: number) => {
+    const itemToEdit = data.find((item) => item.id === id);
+    // console.log("item to edit", itemToEdit);
+    setEditItem(itemToEdit);
+    setOpenEditDialog(true);
+  };
+
+  //edit
+  const handleClose = () => {
+    setOpenEditDialog(false);
+  };
+
   //delete for item
   const handleRemove = (id: number) => {
     remove(id);
   };
 
-  //edit dialog box
-  const handleClickOpen = (id: number) => {
-    const itemToEdit = data.find((item) => item.id === id);
-    console.log("item to edit", itemToEdit);
-    setEditItem(itemToEdit);
-    setOpenEditDialog(true);
+  //delete dialog box
+  const handleClickDelete = (id: number) => {
+    const itemToDelete = data.find((item) => item.id === id);
+    // console.log("item to edit", itemToEdit);
+    setDeleteItem(itemToDelete);
+    setOpenDeleteDialog(true);
   };
 
-  const handleClose = () => {
-    setOpenEditDialog(false);
+  //delete
+  const handleCloseDelete = () => {
+    setDeleteItem(undefined);
   };
 
   return (
@@ -240,8 +259,8 @@ export default function TableComponent({
                       </button>
                       <br />
                       <button
-                        onClick={() => handleRemove(d.id)}
                         className={styles.button}
+                        onClick={() => handleClickDelete(d.id)}
                       >
                         <FiTrash className={styles.delete} />
                         Delete
@@ -260,6 +279,17 @@ export default function TableComponent({
                 editItem={editItem}
                 editModal={editModal}
                 handleCloseEdit={handleCloseEdit}
+              />
+            </Dialog>
+          )}
+
+          {deleteItem && (
+            <Dialog open={deleteModal} onClose={handleCloseDelete}>
+              <ConfirmationBox
+                remove={(id: number) => handleRemove(id)}
+                handleCloseDelete={handleCloseDelete}
+                id={deleteItem.id}
+                open={deleteModal}
               />
             </Dialog>
           )}

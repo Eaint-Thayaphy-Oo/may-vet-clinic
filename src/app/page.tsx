@@ -14,6 +14,7 @@ export default function Home() {
   const [idCounter, setIdCounter] = useState<number>(6);
   const [createModal, setCreateModal] = useState<boolean>(false);
   const [editModal, setEditModal] = useState<boolean>(true);
+  const [deleteModal, setDeleteModal] = useState<boolean>(true);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
 
@@ -53,6 +54,9 @@ export default function Home() {
     // console.log(id);
     let remainUsers = data.filter((d) => d.id != id);
     setData(remainUsers);
+    setMessage("Patient is successfully deleted!");
+    setOpenSnackbar(true);
+    setDeleteModal(false);
   };
 
   //update data
@@ -91,6 +95,7 @@ export default function Home() {
         remove={removeItemHandler}
         onSubmit={handleOnUpdate}
         editModal={editModal}
+        deleteModal={deleteModal}
         handleCloseEdit={handleCloseEdit}
       />
       <MySnackbar

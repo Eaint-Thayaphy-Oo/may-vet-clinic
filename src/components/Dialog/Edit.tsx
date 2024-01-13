@@ -78,7 +78,7 @@ export default function Edit({
             fontWeight: "medium",
           }}
         >
-          Add new patient
+          Update patient
         </DialogTitle>
         <DialogContent>
           <DialogContentText
@@ -90,7 +90,7 @@ export default function Edit({
               textAlign: "center",
             }}
           >
-            Enter new patient information below
+            Enter update patient information below
           </DialogContentText>
           <DialogActions>
             <div>
@@ -302,7 +302,6 @@ export default function Edit({
             type="submit"
             variant="contained"
             sx={{ backgroundColor: "#EDC339", width: "100px" }}
-            // onClick={() => handleUpdate}
           >
             Update
           </Button>
