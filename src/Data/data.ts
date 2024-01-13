@@ -1,12 +1,12 @@
-import { patientData } from "@/app/page";
+import { patientData } from "@/type/type";
 
 const items: patientData[] = [
   {
     id: 1,
     name: "Mj",
     status: "picky",
-    pawrent: "NayChi",
-    breed: "spaniel",
+    pawrent: "SuSu",
+    breed: "beagle",
     gender: "female",
     dateOfBirth: "2016-04-01",
     phone: "12345",

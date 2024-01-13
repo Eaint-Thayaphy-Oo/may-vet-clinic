@@ -16,6 +16,14 @@ interface HeaderProps {
   handleClose: () => void;
   createModal: boolean;
   handleClickOpen: () => void;
+  searchInput: string;
+  handleSearchInputChange: (event: any) => void;
+  selectedStatus: string;
+  handleStatusChange: (event: any) => void;
+  selectedBreed: string;
+  handleBreedChange: (event: any) => void;
+  itemsPerPage: number;
+  handlePageChange: (event: any, value: any) => void;
 }
 
 export default function Header({
@@ -23,6 +31,14 @@ export default function Header({
   createModal,
   handleClickOpen,
   handleClose,
+  searchInput,
+  handleSearchInputChange,
+  selectedStatus,
+  handleStatusChange,
+  selectedBreed,
+  handleBreedChange,
+  itemsPerPage,
+  handlePageChange,
 }: HeaderProps) {
   return (
     <>
@@ -34,6 +50,7 @@ export default function Header({
               <TextField
                 id="outlined-basic"
                 variant="outlined"
+                value={searchInput}
                 placeholder="Search table"
                 InputProps={{
                   style: {
@@ -42,6 +59,7 @@ export default function Header({
                     height: "40px",
                   },
                 }}
+                onChange={(event) => handleSearchInputChange(event)}
               />
               <CiSearch className={styles.icon} />
             </div>
@@ -59,6 +77,8 @@ export default function Header({
                   },
                 }}
                 helperText=""
+                value={selectedStatus}
+                onChange={(event) => handleStatusChange(event)}
               >
                 {status.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -80,6 +100,8 @@ export default function Header({
                   },
                 }}
                 helperText=""
+                value={selectedBreed}
+                onChange={(event) => handleBreedChange(event)}
               >
                 {breed.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -118,6 +140,10 @@ export default function Header({
                   },
                 }}
                 helperText=""
+                value={itemsPerPage}
+                onChange={(_event: any, value: any) =>
+                  handlePageChange(_event, value)
+                }
               >
                 {rows.map((option) => (
                   <option key={option.value} value={option.value}>

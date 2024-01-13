@@ -6,7 +6,7 @@ export type patientData = {
   breed: string;
   gender: string;
   dateOfBirth: string | Date | null;
-  phone?: number;
+  phone: string | number;
   address: string;
   township?: string;
   city?: string;
@@ -17,7 +17,7 @@ export interface IFormInput {
   name: string;
   pawrent: string;
   gender: string;
-  phone?: number;
+  phone: string | number;
   city: string;
   status: string;
   breed: string;

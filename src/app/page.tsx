@@ -8,6 +8,7 @@ import items from "../Data/data";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { patientData, IFormInput } from "@/type/type";
 import MySnackbar from "@/components/MySnackbar/MySnackbar";
+import { Pagination } from "@mui/material";
 
 export default function Home() {
   const [data, setData] = useState<patientData[]>(items);
@@ -17,6 +18,69 @@ export default function Home() {
   const [deleteModal, setDeleteModal] = useState<boolean>(true);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+  //search
+  const [searchInput, setSearchInput] = useState("");
+  //filter
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedBreed, setSelectedBreed] = useState("");
+  //rowsperpage
+  const itemsPerPage = 3;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  //search
+  const handleSearchInputChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setSearchInput(event.target.value);
+  };
+
+  const filteredData = data.filter((item) => {
+    return (
+      item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.pawrent.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.gender.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.phone.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.city?.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.status.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.breed.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.dateOfBirth.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.township?.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.address.toLowerCase().includes(searchInput.toLowerCase())
+    );
+  });
+
+  //filter
+  const handleStatusChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  const handleBreedChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setSelectedBreed(event.target.value);
+  };
+
+  const statusFilteredData = selectedStatus
+    ? filteredData.filter((item) => item.status === selectedStatus)
+    : filteredData;
+
+  const breedFilteredData = selectedBreed
+    ? statusFilteredData.filter((item) => item.breed === selectedBreed)
+    : statusFilteredData;
+
+  //rows per page
+  const handlePageChange = (
+    _event: any,
+    value: React.SetStateAction<number>
+  ) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedData = breedFilteredData.slice(startIndex, endIndex);
 
   const {
     formState: { errors },
@@ -89,9 +153,23 @@ export default function Home() {
         handleClose={handleClose}
         createModal={createModal}
         handleClickOpen={handleClickOpen}
+        searchInput={searchInput}
+        handleSearchInputChange={handleSearchInputChange}
+        selectedStatus={selectedStatus}
+        handleStatusChange={handleStatusChange}
+        selectedBreed={selectedBreed}
+        handleBreedChange={handleBreedChange}
+        itemsPerPage={itemsPerPage}
+        handlePageChange={handlePageChange}
       />
       <TableComponent
-        data={data}
+        data={
+          data &&
+          filteredData &&
+          statusFilteredData &&
+          breedFilteredData &&
+          paginatedData
+        }
         remove={removeItemHandler}
         onSubmit={handleOnUpdate}
         editModal={editModal}
@@ -102,6 +180,12 @@ export default function Home() {
         message={message}
         open={openSnackbar}
         autoHideDuration={6000}
+      />
+      <Pagination
+        sx={{ marginTop: "10px", marginLeft: "600px" }}
+        count={Math.ceil(breedFilteredData.length / itemsPerPage)}
+        page={currentPage}
+        onChange={handlePageChange}
       />
     </>
   );
