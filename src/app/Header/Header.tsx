@@ -23,7 +23,9 @@ interface HeaderProps {
   selectedBreed: string;
   handleBreedChange: (event: any) => void;
   itemsPerPage: number;
-  handlePageChange: (event: any, value: any) => void;
+  handleItemsPerPageChange: (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => void;
 }
 
 export default function Header({
@@ -38,7 +40,7 @@ export default function Header({
   selectedBreed,
   handleBreedChange,
   itemsPerPage,
-  handlePageChange,
+  handleItemsPerPageChange,
 }: HeaderProps) {
   return (
     <>
@@ -141,9 +143,7 @@ export default function Header({
                 }}
                 helperText=""
                 value={itemsPerPage}
-                onChange={(_event: any, value: any) =>
-                  handlePageChange(_event, value)
-                }
+                onChange={handleItemsPerPageChange}
               >
                 {rows.map((option) => (
                   <option key={option.value} value={option.value}>

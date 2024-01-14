@@ -24,7 +24,7 @@ export default function Home() {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [selectedBreed, setSelectedBreed] = useState("");
   //rowsperpage
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
 
   //search
@@ -43,7 +43,7 @@ export default function Home() {
       item.city?.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.status.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.breed.toLowerCase().includes(searchInput.toLowerCase()) ||
-      item.dateOfBirth.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.dateOfBirth?.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.township?.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.address.toLowerCase().includes(searchInput.toLowerCase())
     );
@@ -71,6 +71,12 @@ export default function Home() {
     : statusFilteredData;
 
   //rows per page
+  const handleItemsPerPageChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const newItemsPerPage = Number(event.target.value);
+    setItemsPerPage(newItemsPerPage);
+    setCurrentPage(1); 
+  };
+
   const handlePageChange = (
     _event: any,
     value: React.SetStateAction<number>
@@ -160,7 +166,7 @@ export default function Home() {
         selectedBreed={selectedBreed}
         handleBreedChange={handleBreedChange}
         itemsPerPage={itemsPerPage}
-        handlePageChange={handlePageChange}
+        handleItemsPerPageChange={handleItemsPerPageChange}
       />
       <TableComponent
         data={
