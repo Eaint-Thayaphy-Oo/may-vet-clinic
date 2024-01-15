@@ -27,9 +27,10 @@ const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
         style={{
           color: "#54BAB9",
           fontSize: "14px",
-          font: "Poppins",
+          fontFamily: "Poppins",
           fontWeight: "bold",
         }}
+        className={styles.container}
       >
         Confirmation{" "}
         <IconButton
@@ -45,17 +46,24 @@ const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
       </DialogTitle>
       <DialogContent>
         <DialogContentText
-          style={{ fontSize: "14px", font: "Poppins", fontWeight: "regular" }}
+          style={{
+            fontSize: "14px",
+            fontFamily: "Poppins",
+            fontWeight: "regular",
+          }}
         >
           Are you sure you want to delete this patient?
         </DialogContentText>
       </DialogContent>
-      <DialogActions style={{ marginRight: "60px" }}>
+      <DialogActions style={{ marginRight: "70px" }}>
         <Button
           type="submit"
           variant="contained"
           sx={{
             backgroundColor: "#CD211D",
+            fontFamily: "Poppins",
+            fontSize: "14px",
+            fontWeight: "regular",
             width: "100px",
             "&:hover": {
               backgroundColor: "#CD211D",
@@ -65,7 +73,16 @@ const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
         >
           Delete
         </Button>
-        <Button variant="outlined" onClick={handleCloseDelete}>
+        <Button
+          variant="outlined"
+          onClick={handleCloseDelete}
+          sx={{
+            fontFamily: "Poppins",
+            fontSize: "14px",
+            fontWeight: "regular",
+            color: "#000000",
+          }}
+        >
           Cancel
         </Button>
       </DialogActions>

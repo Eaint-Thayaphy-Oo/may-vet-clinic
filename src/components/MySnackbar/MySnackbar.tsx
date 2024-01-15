@@ -26,7 +26,14 @@ const MySnackbar: React.FC<SnackbarProps> = ({ message, open }) => {
             onClose={handleCloseAlert}
             variant="filled"
             severity="success"
-            sx={{ width: "100%" }}
+            sx={{
+              width: "100%",
+              fontFamily: "Poppins",
+              fontSize: "14px",
+              fontWeight: "regular",
+              color: "#ffffff",
+              backgroundColor: "#1AB45D",
+            }}
           >
             {message}
           </Alert>

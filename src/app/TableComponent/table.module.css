@@ -6,6 +6,10 @@
   right: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Poppins";
+  font-size: "14px";
+  font-weight: "regular";
+  color: "#000000";
 }
 
 .pencil,
@@ -32,7 +36,7 @@
   color: #000000;
 }
 
-.button:hover{
+.button:hover {
   background-color: rgb(249, 244, 244);
 }
 

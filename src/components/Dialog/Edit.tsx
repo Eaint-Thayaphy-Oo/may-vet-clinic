@@ -69,7 +69,7 @@ export default function Edit({
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
         <Stack justifyContent={"space-between"} alignItems={"center"}>
           <IconButton
             sx={{
@@ -85,7 +85,7 @@ export default function Edit({
             sx={{
               color: "#54bab9",
               textAlign: "center",
-              fontStyle: "Poppins",
+              fontFamily: "Poppins",
               fontSize: "18px",
               fontWeight: "medium",
             }}
@@ -95,7 +95,7 @@ export default function Edit({
           <DialogContent>
             <DialogContentText
               sx={{
-                fontStyle: "Poppins",
+                fontFamily: "Poppins",
                 fontSize: "12px",
                 fontWeight: "regular",
                 color: "#444444",
@@ -113,7 +113,16 @@ export default function Edit({
               >
                 <div>
                   <FormControl error={!!errors["name"]}>
-                    <FormLabel>Pet Name</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Pet Name
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -123,13 +132,22 @@ export default function Edit({
                           error={!!errors["name"]}
                           value={field.value || ""}
                           onChange={(e) => field.onChange(e.target.value)}
-                          style={{ height: "40px" }}
+                          style={{ height: "40px", marginBottom: "10px" }}
                         />
                       )}
                     />
                   </FormControl>
                   <FormControl error={!!errors["pawrent"]}>
-                    <FormLabel>Pawrent</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Pawrent
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -139,13 +157,22 @@ export default function Edit({
                           error={!!errors["pawrent"]}
                           value={field.value || ""}
                           onChange={(e) => field.onChange(e.target.value)}
-                          style={{ height: "40px" }}
+                          style={{ height: "40px", marginBottom: "10px" }}
                         />
                       )}
                     />
                   </FormControl>
                   <FormControl error={!!errors["gender"]}>
-                    <FormLabel>Gender</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Gender
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -157,6 +184,7 @@ export default function Edit({
                           name="row-radio-buttons-group"
                           value={field.value || ""}
                           onChange={(e) => field.onChange(e.target.value)}
+                          style={{ marginBottom: "10px" }}
                         >
                           <FormControlLabel
                             value="male"
@@ -173,7 +201,16 @@ export default function Edit({
                     />
                   </FormControl>
                   <FormControl error={!!errors["phone"]}>
-                    <FormLabel>Contact Phone No.</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Contact Phone No.
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -183,13 +220,22 @@ export default function Edit({
                           error={!!errors["phone"]}
                           value={field.value || ""}
                           onChange={(e) => field.onChange(e.target.value)}
-                          style={{ height: "40px" }}
+                          style={{ height: "40px", marginBottom: "10px" }}
                         />
                       )}
                     />
                   </FormControl>
                   <FormControl error={!!errors["city"]}>
-                    <FormLabel>City</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      City
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -213,7 +259,16 @@ export default function Edit({
                 </div>
                 <div>
                   <FormControl error={!!errors["status"]}>
-                    <FormLabel>Status</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Status
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -223,7 +278,11 @@ export default function Edit({
                           native
                           value={field.value || ""}
                           onChange={(e) => field.onChange(e.target.value)}
-                          sx={{ width: "222px", height: "40px" }}
+                          sx={{
+                            width: "222px",
+                            height: "40px",
+                            marginBottom: "9px",
+                          }}
                         >
                           {statusOptions.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -235,7 +294,16 @@ export default function Edit({
                     />
                   </FormControl>
                   <FormControl error={!!errors["breed"]}>
-                    <FormLabel>Breed</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Breed
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -245,7 +313,11 @@ export default function Edit({
                           native
                           value={field.value || ""}
                           onChange={(e) => field.onChange(e.target.value)}
-                          sx={{ width: "222px", height: "40px" }}
+                          sx={{
+                            width: "222px",
+                            height: "40px",
+                            marginBottom: "9px",
+                          }}
                         >
                           {breedOptions.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -257,7 +329,16 @@ export default function Edit({
                     />
                   </FormControl>
                   <FormControl error={!!errors["dateOfBirth"]}>
-                    <FormLabel>Date of Birth</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Date of Birth
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -268,7 +349,11 @@ export default function Edit({
                             {...field}
                             value={dayjs(field.value) || null}
                             onChange={(value) => field.onChange(dayjs(value))}
-                            sx={{ width: "222px", height: "50px" }}
+                            sx={{
+                              width: "222px",
+                              height: "50px",
+                              marginBottom: "9px",
+                            }}
                             format="DD-MM-YYYY"
                           />
                         </LocalizationProvider>
@@ -276,7 +361,16 @@ export default function Edit({
                     />
                   </FormControl>
                   <FormControl error={!!errors["address"]}>
-                    <FormLabel>Address</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Address
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -286,14 +380,27 @@ export default function Edit({
                           error={!!errors["address"]}
                           value={field.value || ""}
                           onChange={(e) => field.onChange(e.target.value)}
-                          style={{ height: "40px", width: "222px" }}
+                          style={{
+                            height: "40px",
+                            width: "222px",
+                            marginBottom: "9px",
+                          }}
                           multiline
                         />
                       )}
                     />
                   </FormControl>
                   <FormControl error={!!errors["township"]}>
-                    <FormLabel>Township</FormLabel>
+                    <FormLabel
+                      sx={{
+                        fontFamily: "Poppins",
+                        fontSize: "12px",
+                        fontWeight: "regular",
+                        color: "#444444",
+                      }}
+                    >
+                      Township
+                    </FormLabel>
                     <Controller
                       control={control}
                       rules={{ required: true }}
@@ -318,13 +425,16 @@ export default function Edit({
               </Stack>
             </DialogActions>
           </DialogContent>
-          <DialogActions sx={{  paddingBottom: "20px" }}>
+          <DialogActions sx={{ paddingBottom: "20px" }}>
             <Button
               type="submit"
               variant="contained"
               sx={{
                 backgroundColor: "#EDC339",
                 width: "100px",
+                fontFamily: "Poppins",
+                fontSize: "14px",
+                fontWeight: "regular",
                 color: "#000000",
                 "&:hover": {
                   backgroundColor: "#EDC339",
@@ -333,7 +443,16 @@ export default function Edit({
             >
               Update
             </Button>
-            <Button variant="outlined" onClick={handleCloseEdit}>
+            <Button
+              variant="outlined"
+              onClick={handleCloseEdit}
+              sx={{
+                fontFamily: "Poppins",
+                fontSize: "14px",
+                fontWeight: "regular",
+                color: "#000000",
+              }}
+            >
               Cancel
             </Button>
           </DialogActions>

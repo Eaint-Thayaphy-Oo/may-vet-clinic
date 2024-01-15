@@ -2,9 +2,15 @@
 
 import React from "react";
 import styles from "./Header.module.css";
-import { Button, Dialog, InputAdornment, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  InputAdornment,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { CiSearch } from "react-icons/ci";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import Create from "@/components/Dialog/Create";
 import { SubmitHandler } from "react-hook-form";
 import { IFormInput } from "@/type/type";
@@ -62,16 +68,17 @@ export default function Header({
                     </InputAdornment>
                   ),
                   style: {
-                    width:"230px",
+                    width: "230px",
                     borderRadius: "15px",
-                    border: "1px solid rgba(68, 68, 68, 0.5)",
                     height: "40px",
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "rgba(68, 68, 68, 0.5)",
                   },
                 }}
                 onChange={(event) => handleSearchInputChange(event)}
               />
-              {/* <CiSearch className={styles.icon} /> */}
-              {/* <Stack><CiSearch /></Stack> */}
             </div>
             <div className={styles.select}>
               <TextField
@@ -84,6 +91,10 @@ export default function Header({
                     borderRadius: "15px",
                     height: "40px",
                     width: "115px",
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
                   },
                 }}
                 helperText=""
@@ -107,6 +118,10 @@ export default function Header({
                     height: "40px",
                     width: "110px",
                     marginLeft: "3px",
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
                   },
                 }}
                 helperText=""
@@ -126,21 +141,31 @@ export default function Header({
               variant="contained"
               onClick={handleClickOpen}
               sx={{
+                fontFamily: "Poppins",
+                fontSize: "14px",
+                fontWeight: "regular",
+                color: "#ffffff",
                 marginTop: "60px",
                 marginRight: "50px",
                 backgroundColor: "#54bab9",
                 border: "1px solid #54bab9",
-                borderRadius:"15px",
+                borderRadius: "15px",
                 "&:hover": {
                   backgroundColor: "#54bab9",
                 },
               }}
             >
-              <img src="/images/add.png" alt="add" width={10} height={10} className={styles.image}/>
+              <img
+                src="/images/add.png"
+                alt="add"
+                width={10}
+                height={10}
+                className={styles.image}
+              />
               Add new patient
             </Button>
             <h4 className={styles.p}>
-              Rows per page :{" "}
+              Rows per pages :{" "}
               <TextField
                 id="outlined-select-currency-native"
                 select

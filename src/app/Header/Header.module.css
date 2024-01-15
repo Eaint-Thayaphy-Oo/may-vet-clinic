@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 .container {
   background-color: #fff;
   margin: 20px;
   position: relative;
   margin-bottom: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .firstblock {
@@ -10,7 +13,7 @@
 }
 
 .header {
-  font-style: Poppins;
+  font-family: Poppins;
   font-size: 22px;
   font-weight: Semibold;
   color: #54bab9;
@@ -37,8 +40,7 @@
 
 .p {
   margin-top: 20px;
-  margin-left: 10px;
-  font-style: Poppins;
+  font-family: Poppins;
   font-size: 14px;
   font-weight: regular;
   color: #000000;

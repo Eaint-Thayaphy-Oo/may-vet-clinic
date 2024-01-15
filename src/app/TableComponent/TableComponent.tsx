@@ -121,9 +121,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -131,9 +131,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -141,9 +141,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -151,9 +151,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -161,9 +161,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -171,9 +171,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -181,9 +181,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -191,9 +191,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -201,9 +201,9 @@ export default function TableComponent({
               </TableCell>
               <TableCell
                 sx={{
-                  fontStyle: "Poppins",
+                  fontFamily: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "bold",
+                  fontWeight: "Semibold",
                   color: "#54bab9",
                 }}
               >
@@ -221,9 +221,34 @@ export default function TableComponent({
                     onChange={() => handleCheckboxChange(d.id.toString())}
                   />
                 </TableCell>
-                <TableCell>{d.id}</TableCell>
-                <TableCell>{d.name}</TableCell>
-                <TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
+                  {d.id}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
+                  {d.name}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
                   {d.status == "allergy" ? (
                     <Image
                       src="/images/allergy.png"
@@ -240,14 +265,64 @@ export default function TableComponent({
                     />
                   )}
                 </TableCell>
-                <TableCell>{d.pawrent}</TableCell>
-                <TableCell>{d.breed}</TableCell>
-                <TableCell>{d.gender}</TableCell>
-                <TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
+                  {d.pawrent}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
+                  {d.breed}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
+                  {d.gender}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
                   {dayjs(d.dateOfBirth).format("DD.MM.YYYY")}
                 </TableCell>
-                <TableCell>{d.phone}</TableCell>
-                <TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
+                  {d.phone}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    fontWeight: "regular",
+                    color: "#000000",
+                  }}
+                >
                   {d.address},{d.city},{d.township}.
                 </TableCell>
                 <TableCell onClick={() => handleOpenModal(d?.id)}>
