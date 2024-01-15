@@ -122,6 +122,9 @@ export default function Header({
                 marginRight: "50px",
                 backgroundColor: "#54bab9",
                 border: "1px solid #54bab9",
+                "&:hover": {
+                  backgroundColor: "#54bab9",
+                },
               }}
             >
               <img src="/images/add.png" alt="add" width={10} height={10} />

@@ -78,7 +78,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       error={!!errors["name"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "50px" }}
+                      style={{ height: "40px" }}
                     />
                   )}
                 />
@@ -94,7 +94,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       error={!!errors["pawrent"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "50px" }}
+                      style={{ height: "40px" }}
                     />
                   )}
                 />
@@ -138,7 +138,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       error={!!errors["phone"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "50px" }}
+                      style={{ height: "40px" }}
                     />
                   )}
                 />
@@ -154,7 +154,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "50px" }}
+                      sx={{ width: "222px", height: "40px" }}
                     >
                       {cityOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -178,7 +178,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "50px" }}
+                      sx={{ width: "222px", height: "40px" }}
                     >
                       {statusOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -200,7 +200,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "50px" }}
+                      sx={{ width: "222px", height: "40px" }}
                     >
                       {breedOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -222,8 +222,8 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       <DatePicker
                         {...field}
                         value={dayjs(field.value) || null}
-                        onChange={(value) => field.onChange(value?.toString())}
-                        sx={{ width: "222px", height: "50px" }}
+                        onChange={(value) => field.onChange(dayjs(value).format("dd.mm.yyyy"))}
+                        sx={{ width: "222px", height: "40px" }}
                       />
                     </LocalizationProvider>
                   )}
@@ -240,7 +240,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       error={!!errors["address"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "50px" }}
+                      style={{ height: "40px" }}
                     />
                   )}
                 />
@@ -256,7 +256,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "50px" }}
+                      sx={{ width: "222px", height: "40px" }}
                     >
                       {townshipOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -274,7 +274,13 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
           <Button
             type="submit"
             variant="contained"
-            sx={{ backgroundColor: "#54bab9", width: "100px" }}
+            sx={{
+              backgroundColor: "#54bab9",
+              width: "100px",
+              '&:hover': {
+                backgroundColor: "#54bab9", 
+              },
+            }}
           >
             Save
           </Button>

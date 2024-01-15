@@ -105,7 +105,7 @@ export default function Edit({
                       error={!!errors["name"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "50px" }}
+                      style={{ height: "40px" }}
                     />
                   )}
                 />
@@ -121,7 +121,7 @@ export default function Edit({
                       error={!!errors["pawrent"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "50px" }}
+                      style={{ height: "40px" }}
                     />
                   )}
                 />
@@ -165,7 +165,7 @@ export default function Edit({
                       error={!!errors["phone"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "50px" }}
+                      style={{ height: "40px" }}
                     />
                   )}
                 />
@@ -181,7 +181,7 @@ export default function Edit({
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "50px" }}
+                      sx={{ width: "222px", height: "40px" }}
                     >
                       {cityOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -205,7 +205,7 @@ export default function Edit({
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "50px" }}
+                      sx={{ width: "222px", height: "40px" }}
                     >
                       {statusOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -227,7 +227,7 @@ export default function Edit({
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "50px" }}
+                      sx={{ width: "222px", height: "40px" }}
                     >
                       {breedOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -249,8 +249,11 @@ export default function Edit({
                       <DatePicker
                         {...field}
                         value={dayjs(field.value) || null}
-                        onChange={(value) => field.onChange(value?.toString())}
-                        sx={{ width: "222px", height: "50px" }}
+                        onChange={(value) =>
+                          field.onChange(dayjs(value).format("DD.MM.YYYY"))
+                        }
+                        sx={{ width: "222px", height: "40px" }}
+                        format="DD-MM-YYYY"
                       />
                     </LocalizationProvider>
                   )}
@@ -267,7 +270,8 @@ export default function Edit({
                       error={!!errors["address"]}
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "50px" }}
+                      style={{ height: "40px", width: "222px" }}
+                      multiline
                     />
                   )}
                 />
@@ -283,7 +287,7 @@ export default function Edit({
                       native
                       value={field.value || ""}
                       onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "50px" }}
+                      sx={{ width: "222px", height: "40px" }}
                     >
                       {townshipOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -301,7 +305,14 @@ export default function Edit({
           <Button
             type="submit"
             variant="contained"
-            sx={{ backgroundColor: "#EDC339", width: "100px" }}
+            sx={{
+              backgroundColor: "#EDC339",
+              width: "100px",
+              color:"#000000",
+              "&:hover": {
+                backgroundColor: "#EDC339",
+              },
+            }}
           >
             Update
           </Button>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import styles from "./page.module.css";
 import Nav from "./Nav/Nav";
 import Header from "./Header/Header";
 import TableComponent from "./TableComponent/TableComponent";
@@ -71,10 +72,12 @@ export default function Home() {
     : statusFilteredData;
 
   //rows per page
-  const handleItemsPerPageChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleItemsPerPageChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
     const newItemsPerPage = Number(event.target.value);
     setItemsPerPage(newItemsPerPage);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   const handlePageChange = (
@@ -153,46 +156,48 @@ export default function Home() {
 
   return (
     <>
-      <Nav />
-      <Header
-        onSubmit={onSubmit}
-        handleClose={handleClose}
-        createModal={createModal}
-        handleClickOpen={handleClickOpen}
-        searchInput={searchInput}
-        handleSearchInputChange={handleSearchInputChange}
-        selectedStatus={selectedStatus}
-        handleStatusChange={handleStatusChange}
-        selectedBreed={selectedBreed}
-        handleBreedChange={handleBreedChange}
-        itemsPerPage={itemsPerPage}
-        handleItemsPerPageChange={handleItemsPerPageChange}
-      />
-      <TableComponent
-        data={
-          data &&
-          filteredData &&
-          statusFilteredData &&
-          breedFilteredData &&
-          paginatedData
-        }
-        remove={removeItemHandler}
-        onSubmit={handleOnUpdate}
-        editModal={editModal}
-        deleteModal={deleteModal}
-        handleCloseEdit={handleCloseEdit}
-      />
-      <MySnackbar
-        message={message}
-        open={openSnackbar}
-        autoHideDuration={6000}
-      />
-      <Pagination
-        sx={{ marginTop: "10px", marginLeft: "600px" }}
-        count={Math.ceil(breedFilteredData.length / itemsPerPage)}
-        page={currentPage}
-        onChange={handlePageChange}
-      />
+      <main className={styles.container}>
+        <Nav />
+        <Header
+          onSubmit={onSubmit}
+          handleClose={handleClose}
+          createModal={createModal}
+          handleClickOpen={handleClickOpen}
+          searchInput={searchInput}
+          handleSearchInputChange={handleSearchInputChange}
+          selectedStatus={selectedStatus}
+          handleStatusChange={handleStatusChange}
+          selectedBreed={selectedBreed}
+          handleBreedChange={handleBreedChange}
+          itemsPerPage={itemsPerPage}
+          handleItemsPerPageChange={handleItemsPerPageChange}
+        />
+        <TableComponent
+          data={
+            data &&
+            filteredData &&
+            statusFilteredData &&
+            breedFilteredData &&
+            paginatedData
+          }
+          remove={removeItemHandler}
+          onSubmit={handleOnUpdate}
+          editModal={editModal}
+          deleteModal={deleteModal}
+          handleCloseEdit={handleCloseEdit}
+        />
+        <MySnackbar
+          message={message}
+          open={openSnackbar}
+          autoHideDuration={6000}
+        />
+        <Pagination
+          sx={{ marginTop: "10px", marginLeft: "600px" }}
+          count={Math.ceil(breedFilteredData.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+        />
+      </main>
     </>
   );
 }

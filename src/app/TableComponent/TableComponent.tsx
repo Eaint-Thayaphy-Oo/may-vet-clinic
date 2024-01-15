@@ -4,6 +4,7 @@ import {
   Checkbox,
   Dialog,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -21,6 +22,7 @@ import Edit from "../../components/Dialog/Edit";
 import { patientData, IFormInput } from "@/type/type";
 import { SubmitHandler } from "react-hook-form";
 import ConfirmationBox from "@/components/ConfirmationBox/ConfirmationBox";
+import dayjs from "dayjs";
 
 interface TableProps {
   data: patientData[];
@@ -103,7 +105,7 @@ export default function TableComponent({
   };
 
   return (
-    <>
+    <Stack mx={2.5}>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -121,7 +123,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -131,7 +133,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -141,7 +143,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -151,7 +153,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -161,7 +163,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -171,7 +173,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -181,7 +183,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -191,7 +193,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -201,7 +203,7 @@ export default function TableComponent({
                 sx={{
                   fontStyle: "Poppins",
                   fontSize: "14px",
-                  fontWeight: "semibold",
+                  fontWeight: "bold",
                   color: "#54bab9",
                 }}
               >
@@ -241,7 +243,9 @@ export default function TableComponent({
                 <TableCell>{d.pawrent}</TableCell>
                 <TableCell>{d.breed}</TableCell>
                 <TableCell>{d.gender}</TableCell>
-                <TableCell>{d.dateOfBirth?.toLocaleString()}</TableCell>
+                <TableCell>
+                  {dayjs(d.dateOfBirth).format("DD.MM.YYYY")}
+                </TableCell>
                 <TableCell>{d.phone}</TableCell>
                 <TableCell>
                   {d.address},{d.city},{d.township}.
@@ -258,6 +262,7 @@ export default function TableComponent({
                         Edit
                       </button>
                       <br />
+                      <hr className={styles.hr} />
                       <button
                         className={styles.button}
                         onClick={() => handleClickDelete(d.id)}
@@ -295,6 +300,6 @@ export default function TableComponent({
           )}
         </Table>
       </TableContainer>
-    </>
+    </Stack>
   );
 }

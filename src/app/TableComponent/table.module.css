@@ -1,11 +1,11 @@
 .modal {
-  width: 100px;
+  width: 120px;
   height: 70px;
   position: absolute;
   background-color: rgb(241, 237, 237);
   right: 20px;
-  border-radius: 10px;
-  box-shadow: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .pencil,
@@ -30,4 +30,8 @@
   font-size: 14px;
   font-weight: regular;
   color: #000000;
+}
+
+.hr {
+  margin-top: 5px;
 }

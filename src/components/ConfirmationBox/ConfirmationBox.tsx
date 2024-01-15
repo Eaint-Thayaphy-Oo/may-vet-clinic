@@ -44,7 +44,13 @@ const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
         <Button
           type="submit"
           variant="contained"
-          sx={{ backgroundColor: "#CD211D", width: "100px" }}
+          sx={{
+            backgroundColor: "#CD211D",
+            width: "100px",
+            "&:hover": {
+              backgroundColor: "#CD211D",
+            },
+          }}
           onClick={() => remove(id)}
         >
           Delete
