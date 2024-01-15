@@ -192,7 +192,7 @@ export default function Home() {
           autoHideDuration={6000}
         />
         <Pagination
-          sx={{ marginTop: "10px", marginLeft: "600px" }}
+          sx={{ marginTop: "10px", marginLeft: "650px" }}
           count={Math.ceil(breedFilteredData.length / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}

@@ -30,3 +30,7 @@ a {
     color-scheme: dark;
   }
 }
+
+html {
+  font-family: var(--font-poppins);
+}

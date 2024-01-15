@@ -56,7 +56,7 @@ export default function Header({
                 placeholder="Search table"
                 InputProps={{
                   style: {
-                    borderRadius: "20px",
+                    borderRadius: "15px",
                     border: "1px solid rgba(68, 68, 68, 0.5)",
                     height: "40px",
                   },
@@ -122,12 +122,13 @@ export default function Header({
                 marginRight: "50px",
                 backgroundColor: "#54bab9",
                 border: "1px solid #54bab9",
+                borderRadius:"15px",
                 "&:hover": {
                   backgroundColor: "#54bab9",
                 },
               }}
             >
-              <img src="/images/add.png" alt="add" width={10} height={10} />
+              <img src="/images/add.png" alt="add" width={10} height={10} className={styles.image}/>
               Add new patient
             </Button>
             <h4 className={styles.p}>

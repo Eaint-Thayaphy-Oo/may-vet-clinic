@@ -37,9 +37,13 @@
 
 .p {
   margin-top: 20px;
-  margin-left: 5px;
+  margin-left: 10px;
   font-style: Poppins;
   font-size: 14px;
   font-weight: regular;
   color: #000000;
+}
+
+.image {
+  margin-right: 15px;
 }

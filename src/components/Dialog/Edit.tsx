@@ -92,7 +92,7 @@ export default function Edit({
           >
             Enter update patient information below
           </DialogContentText>
-          <DialogActions>
+          <DialogActions sx={{ padding: "20px", marginLeft: "23px" }}>
             <div>
               <FormControl error={!!errors["name"]}>
                 <FormLabel>Pet Name</FormLabel>
@@ -249,10 +249,8 @@ export default function Edit({
                       <DatePicker
                         {...field}
                         value={dayjs(field.value) || null}
-                        onChange={(value) =>
-                          field.onChange(dayjs(value).format("DD.MM.YYYY"))
-                        }
-                        sx={{ width: "222px", height: "40px" }}
+                        onChange={(value) => field.onChange(dayjs(value))}
+                        sx={{ width: "222px", height: "50px" }}
                         format="DD-MM-YYYY"
                       />
                     </LocalizationProvider>
@@ -301,14 +299,14 @@ export default function Edit({
             </div>
           </DialogActions>
         </DialogContent>
-        <DialogActions sx={{ marginRight: "220px" }}>
+        <DialogActions sx={{ marginRight: "195px", paddingBottom: "20px" }}>
           <Button
             type="submit"
             variant="contained"
             sx={{
               backgroundColor: "#EDC339",
               width: "100px",
-              color:"#000000",
+              color: "#000000",
               "&:hover": {
                 backgroundColor: "#EDC339",
               },

@@ -32,6 +32,10 @@
   color: #000000;
 }
 
+.button:hover{
+  background-color: rgb(249, 244, 244);
+}
+
 .hr {
   margin-top: 5px;
 }

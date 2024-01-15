@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import Image from "next/image";
-import { AiOutlineMore } from "react-icons/ai";
+import { MdMoreVert } from "react-icons/md";
 import { LuPencil } from "react-icons/lu";
 import { FiTrash } from "react-icons/fi";
 import styles from "./table.module.css";
@@ -251,7 +251,7 @@ export default function TableComponent({
                   {d.address},{d.city},{d.township}.
                 </TableCell>
                 <TableCell onClick={() => handleOpenModal(d?.id)}>
-                  <AiOutlineMore />
+                  <MdMoreVert />
                   {showDropDown === d?.id && (
                     <div className={styles.modal}>
                       <button

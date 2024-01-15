@@ -65,7 +65,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
           >
             Enter new patient information below
           </DialogContentText>
-          <DialogActions>
+          <DialogActions sx={{ padding: "20px", marginLeft: "23px" }}>
             <div>
               <FormControl error={!!errors["name"]}>
                 <FormLabel>Pet Name</FormLabel>
@@ -222,8 +222,10 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       <DatePicker
                         {...field}
                         value={dayjs(field.value) || null}
-                        onChange={(value) => field.onChange(dayjs(value).format("dd.mm.yyyy"))}
-                        sx={{ width: "222px", height: "40px" }}
+                        onChange={(value) =>
+                          field.onChange(dayjs(value))
+                        }
+                        sx={{ width: "222px", height: "50px" }}
                       />
                     </LocalizationProvider>
                   )}
@@ -270,15 +272,15 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
             </div>
           </DialogActions>
         </DialogContent>
-        <DialogActions sx={{ marginRight: "220px" }}>
+        <DialogActions sx={{ marginRight: "195px" ,paddingBottom:"20px"}}>
           <Button
             type="submit"
             variant="contained"
             sx={{
               backgroundColor: "#54bab9",
               width: "100px",
-              '&:hover': {
-                backgroundColor: "#54bab9", 
+              "&:hover": {
+                backgroundColor: "#54bab9",
               },
             }}
           >

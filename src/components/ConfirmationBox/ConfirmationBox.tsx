@@ -27,7 +27,7 @@ const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
           color: "#54BAB9",
           fontSize: "14px",
           font: "Poppins",
-          fontWeight: "regular",
+          fontWeight: "bold",
         }}
       >
         Confirmation{" "}
