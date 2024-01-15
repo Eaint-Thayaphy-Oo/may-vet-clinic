@@ -40,7 +40,7 @@ export default function Home() {
       item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.pawrent.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.gender.toLowerCase().includes(searchInput.toLowerCase()) ||
-      item.phone.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.phone.toString().toLowerCase().includes(searchInput.toLowerCase()) ||
       item.city?.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.status.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.breed.toLowerCase().includes(searchInput.toLowerCase()) ||

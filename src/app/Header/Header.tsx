@@ -2,8 +2,9 @@
 
 import React from "react";
 import styles from "./Header.module.css";
-import { Button, Dialog, TextField } from "@mui/material";
+import { Button, Dialog, InputAdornment, Stack, TextField } from "@mui/material";
 import { CiSearch } from "react-icons/ci";
+import SearchIcon from '@mui/icons-material/Search';
 import Create from "@/components/Dialog/Create";
 import { SubmitHandler } from "react-hook-form";
 import { IFormInput } from "@/type/type";
@@ -55,7 +56,13 @@ export default function Header({
                 value={searchInput}
                 placeholder="Search table"
                 InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
                   style: {
+                    width:"230px",
                     borderRadius: "15px",
                     border: "1px solid rgba(68, 68, 68, 0.5)",
                     height: "40px",
@@ -63,7 +70,8 @@ export default function Header({
                 }}
                 onChange={(event) => handleSearchInputChange(event)}
               />
-              <CiSearch className={styles.icon} />
+              {/* <CiSearch className={styles.icon} /> */}
+              {/* <Stack><CiSearch /></Stack> */}
             </div>
             <div className={styles.select}>
               <TextField

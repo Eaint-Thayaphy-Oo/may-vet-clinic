@@ -7,10 +7,12 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  IconButton,
   OutlinedInput,
   Radio,
   RadioGroup,
   Select,
+  Stack,
 } from "@mui/material";
 import React from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -25,6 +27,7 @@ import { statusOptions } from "@/type/type";
 import { breedOptions } from "@/type/type";
 import { cityOptions } from "@/type/type";
 import { townshipOptions } from "@/type/type";
+import { Poppins } from "next/font/google";
 
 interface CreateDialogProps {
   onSubmit: SubmitHandler<IFormInput>;
@@ -39,16 +42,28 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
   } = useForm<IFormInput>();
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <RxCross1 className={styles.icon} onClick={handleClose} />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Stack
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
+        <IconButton
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+          }}
+          onClick={handleClose}
+        >
+          <RxCross1 />
+        </IconButton>
         <DialogTitle
           sx={{
             color: "#54bab9",
             textAlign: "center",
-            fontStyle: "Poppins",
-            fontSize: "18px",
-            fontWeight: "medium",
+            fontSize: "20px",
+            // fontWeight: "medium",
+            fontFamily: "Poppins",
           }}
         >
           Add new patient
@@ -56,7 +71,6 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
         <DialogContent>
           <DialogContentText
             sx={{
-              fontStyle: "Poppins",
               fontSize: "12px",
               fontWeight: "regular",
               color: "#444444",
@@ -65,214 +79,219 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
           >
             Enter new patient information below
           </DialogContentText>
-          <DialogActions sx={{ padding: "20px", marginLeft: "23px" }}>
-            <div>
-              <FormControl error={!!errors["name"]}>
-                <FormLabel>Pet Name</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="name"
-                  render={({ field }) => (
-                    <OutlinedInput
-                      error={!!errors["name"]}
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "40px" }}
-                    />
-                  )}
-                />
-              </FormControl>
-              <FormControl error={!!errors["pawrent"]}>
-                <FormLabel>Pawrent</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="pawrent"
-                  render={({ field }) => (
-                    <OutlinedInput
-                      error={!!errors["pawrent"]}
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "40px" }}
-                    />
-                  )}
-                />
-              </FormControl>
-              <FormControl error={!!errors["gender"]}>
-                <FormLabel>Gender</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="gender"
-                  render={({ field }) => (
-                    <RadioGroup
-                      row
-                      aria-labelledby="demo-row-radio-buttons-group-label"
-                      name="row-radio-buttons-group"
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                    >
-                      <FormControlLabel
-                        value="male"
-                        control={<Radio />}
-                        label="Male"
+          <DialogActions>
+            <Stack
+              justifyContent={"space-between"}
+              alignItems={"center"}
+              direction={"row"}
+              spacing={11}
+            >
+              <div>
+                <FormControl error={!!errors["name"]}>
+                  <FormLabel>Pet Name</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="name"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["name"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        style={{ height: "40px" }}
                       />
-                      <FormControlLabel
-                        value="female"
-                        control={<Radio />}
-                        label="Female"
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["pawrent"]}>
+                  <FormLabel>Pawrent</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="pawrent"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["pawrent"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        style={{ height: "40px" }}
                       />
-                    </RadioGroup>
-                  )}
-                />
-              </FormControl>
-              <FormControl error={!!errors["phone"]}>
-                <FormLabel>Contact Phone No.</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="phone"
-                  render={({ field }) => (
-                    <OutlinedInput
-                      error={!!errors["phone"]}
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "40px" }}
-                    />
-                  )}
-                />
-              </FormControl>
-              <FormControl error={!!errors["city"]}>
-                <FormLabel>City</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="city"
-                  render={({ field }) => (
-                    <Select
-                      native
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "40px" }}
-                    >
-                      {cityOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </Select>
-                  )}
-                />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl error={!!errors["status"]}>
-                <FormLabel>Status</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="status"
-                  render={({ field }) => (
-                    <Select
-                      native
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "40px" }}
-                    >
-                      {statusOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </Select>
-                  )}
-                />
-              </FormControl>
-              <FormControl error={!!errors["breed"]}>
-                <FormLabel>Breed</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="breed"
-                  render={({ field }) => (
-                    <Select
-                      native
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "40px" }}
-                    >
-                      {breedOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </Select>
-                  )}
-                />
-              </FormControl>
-              <FormControl error={!!errors["dateOfBirth"]}>
-                <FormLabel>Date of Birth</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="dateOfBirth"
-                  render={({ field }) => (
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        {...field}
-                        value={dayjs(field.value) || null}
-                        onChange={(value) =>
-                          field.onChange(dayjs(value))
-                        }
-                        sx={{ width: "222px", height: "50px" }}
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["gender"]}>
+                  <FormLabel>Gender</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="gender"
+                    render={({ field }) => (
+                      <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                      >
+                        <FormControlLabel
+                          value="male"
+                          control={<Radio />}
+                          label="Male"
+                        />
+                        <FormControlLabel
+                          value="female"
+                          control={<Radio />}
+                          label="Female"
+                        />
+                      </RadioGroup>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["phone"]}>
+                  <FormLabel>Contact Phone No.</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="phone"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["phone"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        style={{ height: "40px" }}
                       />
-                    </LocalizationProvider>
-                  )}
-                />
-              </FormControl>
-              <FormControl error={!!errors["address"]}>
-                <FormLabel>Address</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="address"
-                  render={({ field }) => (
-                    <OutlinedInput
-                      error={!!errors["address"]}
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      style={{ height: "40px" }}
-                    />
-                  )}
-                />
-              </FormControl>
-              <FormControl error={!!errors["township"]}>
-                <FormLabel>Township</FormLabel>
-                <Controller
-                  control={control}
-                  rules={{ required: true }}
-                  name="township"
-                  render={({ field }) => (
-                    <Select
-                      native
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      sx={{ width: "222px", height: "40px" }}
-                    >
-                      {townshipOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </Select>
-                  )}
-                />
-              </FormControl>
-            </div>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["city"]}>
+                  <FormLabel>City</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="city"
+                    render={({ field }) => (
+                      <Select
+                        native
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        sx={{ width: "222px", height: "40px" }}
+                      >
+                        {cityOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+              </div>
+              <div>
+                <FormControl error={!!errors["status"]}>
+                  <FormLabel>Status</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="status"
+                    render={({ field }) => (
+                      <Select
+                        native
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        sx={{ width: "222px", height: "40px" }}
+                      >
+                        {statusOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["breed"]}>
+                  <FormLabel>Breed</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="breed"
+                    render={({ field }) => (
+                      <Select
+                        native
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        sx={{ width: "222px", height: "40px" }}
+                      >
+                        {breedOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["dateOfBirth"]}>
+                  <FormLabel>Date of Birth</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="dateOfBirth"
+                    render={({ field }) => (
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                          {...field}
+                          value={dayjs(field.value) || null}
+                          onChange={(value) => field.onChange(dayjs(value))}
+                          sx={{ width: "222px" }}
+                        />
+                      </LocalizationProvider>
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["address"]}>
+                  <FormLabel>Address</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="address"
+                    render={({ field }) => (
+                      <OutlinedInput
+                        error={!!errors["address"]}
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        style={{ height: "40px" }}
+                      />
+                    )}
+                  />
+                </FormControl>
+                <FormControl error={!!errors["township"]}>
+                  <FormLabel>Township</FormLabel>
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="township"
+                    render={({ field }) => (
+                      <Select
+                        native
+                        value={field.value || ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        sx={{ width: "222px", height: "40px" }}
+                      >
+                        {townshipOptions.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+              </div>
+            </Stack>
           </DialogActions>
         </DialogContent>
-        <DialogActions sx={{ marginRight: "195px" ,paddingBottom:"20px"}}>
+        <DialogActions sx={{ paddingBottom: "20px" }}>
           <Button
             type="submit"
             variant="contained"
@@ -290,7 +309,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
             Cancel
           </Button>
         </DialogActions>
-      </form>
-    </>
+      </Stack>
+    </form>
   );
 }

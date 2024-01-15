@@ -6,6 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { RxCross1 } from "react-icons/rx";
 import styles from "./ConfirmationBox.module.css";
+import { IconButton } from "@mui/material";
 
 interface ConfirmationBoxProps {
   open: boolean;
@@ -31,7 +32,16 @@ const ConfirmationBox: React.FC<ConfirmationBoxProps> = ({
         }}
       >
         Confirmation{" "}
-        <RxCross1 className={styles.icon} onClick={handleCloseDelete} />
+        <IconButton
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+          }}
+          onClick={handleCloseDelete}
+        >
+          <RxCross1 />
+        </IconButton>
       </DialogTitle>
       <DialogContent>
         <DialogContentText
