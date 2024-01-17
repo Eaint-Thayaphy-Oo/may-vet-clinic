@@ -23,6 +23,7 @@ import { patientData, IFormInput } from "@/type/type";
 import { SubmitHandler } from "react-hook-form";
 import ConfirmationBox from "@/components/ConfirmationBox/ConfirmationBox";
 import dayjs from "dayjs";
+import { FaLaptopHouse, FaLastfmSquare } from "react-icons/fa";
 
 interface TableProps {
   data: patientData[];
@@ -351,13 +352,16 @@ export default function TableComponent({
             ))}
           </TableBody>
           {editItem && (
-            <Dialog open={editModal} onClose={handleCloseEdit}>
+            <Dialog
+              open={openEditDialog}
+              onClose={() => setOpenEditDialog(false)}
+            >
               <Edit
                 onSubmit={onSubmit}
-                handleClose={handleClose}
+                handleClose={() => setOpenEditDialog(false)}
                 editItem={editItem}
                 editModal={editModal}
-                handleCloseEdit={handleCloseEdit}
+                handleCloseEdit={() => setOpenEditDialog(false)}
               />
             </Dialog>
           )}

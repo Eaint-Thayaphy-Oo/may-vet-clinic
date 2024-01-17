@@ -116,7 +116,7 @@ export default function Home() {
     const newItem = { ...data, id: idCounter };
     setData((prevData) => [...prevData, newItem]);
     setIdCounter((prevId) => prevId + 1);
-    setMessage("Patient is successfully created!");
+     setMessage("Patient is successfully created!");
     setOpenSnackbar(true);
     setCreateModal(false);
     handleClose();
@@ -150,8 +150,8 @@ export default function Home() {
       }
       setMessage("Patient is successfully updated!");
       setOpenSnackbar(true);
-      setEditModal(false);
-      handleCloseEdit();
+      // setEditModal(false);
+      
     });
   };
 
