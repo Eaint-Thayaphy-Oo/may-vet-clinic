@@ -37,8 +37,12 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
   const {
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<IFormInput>();
+    formState: { errors, message },
+  } = useForm<IFormInput>({
+    defaultValues: {
+      dateOfBirth: null,
+    },
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
@@ -315,13 +319,19 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                     control={control}
                     rules={{ required: true }}
                     name="dateOfBirth"
-                    render={({ field }) => (
+                    render={({ field, fieldState: { error } }) => (
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                           {...field}
                           value={dayjs(field.value) || null}
                           onChange={(value) => field.onChange(dayjs(value))}
                           sx={{ width: "222px", marginBottom: "9px" }}
+                          slotProps={{
+                            textField: {
+                              error: !!error,
+                              helperText: error?.message,
+                            },
+                          }}
                         />
                       </LocalizationProvider>
                     )}
