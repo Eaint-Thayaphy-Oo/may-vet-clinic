@@ -40,6 +40,7 @@ interface EditDialogProps {
 export default function Edit({
   onSubmit,
   editItem,
+  editModal,
   handleCloseEdit,
 }: EditDialogProps) {
   const {

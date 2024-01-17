@@ -27,7 +27,6 @@ import { statusOptions } from "@/type/type";
 import { breedOptions } from "@/type/type";
 import { cityOptions } from "@/type/type";
 import { townshipOptions } from "@/type/type";
-import { Poppins } from "next/font/google";
 
 interface CreateDialogProps {
   onSubmit: SubmitHandler<IFormInput>;

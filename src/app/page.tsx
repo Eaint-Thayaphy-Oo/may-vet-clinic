@@ -151,6 +151,7 @@ export default function Home() {
       setMessage("Patient is successfully updated!");
       setOpenSnackbar(true);
       setEditModal(false);
+      handleCloseEdit();
     });
   };
 

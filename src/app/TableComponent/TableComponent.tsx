@@ -329,22 +329,21 @@ export default function TableComponent({
                   <MdMoreVert />
                   {showDropDown === d?.id && (
                     <div className={styles.modal}>
-                      <button
+                      <div
                         className={styles.button}
                         onClick={() => handleClickOpen(d.id)}
                       >
                         <LuPencil className={styles.pencil} />
                         Edit
-                      </button>
-                      <br />
+                      </div>
                       <hr className={styles.hr} />
-                      <button
+                      <div
                         className={styles.button}
                         onClick={() => handleClickDelete(d.id)}
                       >
                         <FiTrash className={styles.delete} />
                         Delete
-                      </button>
+                      </div>
                     </div>
                   )}
                 </TableCell>
@@ -352,7 +351,7 @@ export default function TableComponent({
             ))}
           </TableBody>
           {editItem && (
-            <Dialog open={editModal} onClose={handleClose}>
+            <Dialog open={editModal} onClose={handleCloseEdit}>
               <Edit
                 onSubmit={onSubmit}
                 handleClose={handleClose}

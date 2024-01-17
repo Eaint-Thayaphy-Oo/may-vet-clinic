@@ -27,13 +27,11 @@ export interface IFormInput {
 }
 
 export const status = [
-  { value: "all", label: "Status All" },
   { value: "allergy", label: "Allergy" },
   { value: "picky", label: "Picky Eater" },
 ];
 
 export const breed = [
-  { value: "all", label: "Breed All" },
   { value: "beagle", label: "Beagle" },
   { value: "spaniel", label: "Spaniel" },
   { value: "golden", label: "Golden Retriever" },
