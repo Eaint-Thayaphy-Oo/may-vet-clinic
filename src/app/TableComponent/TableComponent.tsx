@@ -23,7 +23,6 @@ import { patientData, IFormInput } from "@/type/type";
 import { SubmitHandler } from "react-hook-form";
 import ConfirmationBox from "@/components/ConfirmationBox/ConfirmationBox";
 import dayjs from "dayjs";
-import { FaLaptopHouse, FaLastfmSquare } from "react-icons/fa";
 
 interface TableProps {
   data: patientData[];
@@ -82,16 +81,6 @@ export default function TableComponent({
     setOpenEditDialog(true);
   };
 
-  //edit
-  const handleClose = () => {
-    setOpenEditDialog(false);
-  };
-
-  //delete for item
-  const handleRemove = (id: number) => {
-    remove(id);
-  };
-
   //delete dialog box
   const handleClickDelete = (id: number) => {
     const itemToDelete = data.find((item) => item.id === id);
@@ -100,9 +89,14 @@ export default function TableComponent({
     setOpenDeleteDialog(true);
   };
 
-  //delete
-  const handleCloseDelete = () => {
-    setDeleteItem(undefined);
+  // Function to close the edit dialog
+  const handleCloseEditDialog = () => {
+    setOpenEditDialog(false);
+  };
+
+  // Function to close the delete dialog
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
   };
 
   return (
@@ -330,21 +324,21 @@ export default function TableComponent({
                   <MdMoreVert />
                   {showDropDown === d?.id && (
                     <div className={styles.modal}>
-                      <div
+                      <button
                         className={styles.button}
                         onClick={() => handleClickOpen(d.id)}
                       >
                         <LuPencil className={styles.pencil} />
                         Edit
-                      </div>
+                      </button>
                       <hr className={styles.hr} />
-                      <div
+                      <button
                         className={styles.button}
                         onClick={() => handleClickDelete(d.id)}
                       >
                         <FiTrash className={styles.delete} />
                         Delete
-                      </div>
+                      </button>
                     </div>
                   )}
                 </TableCell>
@@ -352,29 +346,32 @@ export default function TableComponent({
             ))}
           </TableBody>
           {editItem && (
-            <Dialog
-              open={openEditDialog}
-              onClose={() => setOpenEditDialog(false)}
-            >
+            <Dialog open={openEditDialog} onClose={handleCloseEditDialog}>
               <Edit
-                onSubmit={onSubmit}
-                handleClose={() => setOpenEditDialog(false)}
+                onSubmit={(editItem, formData) => {
+                  onSubmit(editItem, formData);
+                  handleCloseEditDialog(); 
+                }}
+                handleClose={handleCloseEditDialog} 
                 editItem={editItem}
                 editModal={editModal}
-                handleCloseEdit={() => setOpenEditDialog(false)}
+                handleCloseEdit={handleCloseEditDialog} 
               />
             </Dialog>
           )}
 
           {deleteItem && (
-            <Dialog open={deleteModal} onClose={handleCloseDelete}>
-              <ConfirmationBox
-                remove={(id: number) => handleRemove(id)}
-                handleCloseDelete={handleCloseDelete}
-                id={deleteItem.id}
-                open={deleteModal}
-              />
-            </Dialog>
+            <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
+            <ConfirmationBox
+              remove={(id: number) => {
+                remove(id);
+                handleCloseDeleteDialog(); 
+              }}
+              handleCloseDelete={handleCloseDeleteDialog}
+              id={deleteItem.id}
+              open={deleteModal}
+            />
+          </Dialog>
           )}
         </Table>
       </TableContainer>

@@ -11,8 +11,8 @@ const items: patientData[] = [
     dateOfBirth: "04.01.2016",
     phone: "0912345",
     address: "no15",
-    township: "shan",
-    city: "pan lone",
+    township: "yangon",
+    city: "tarmwae",
   },
   {
     id: 2,
@@ -24,8 +24,8 @@ const items: patientData[] = [
     dateOfBirth: "1.9.2020",
     phone: "09125456",
     address: "no12",
-    township: "mandalay",
-    city: "mahar si thu",
+    township: "yangon",
+    city: "insein",
   },
   {
     id: 3,

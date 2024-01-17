@@ -116,7 +116,7 @@ export default function Home() {
     const newItem = { ...data, id: idCounter };
     setData((prevData) => [...prevData, newItem]);
     setIdCounter((prevId) => prevId + 1);
-     setMessage("Patient is successfully created!");
+    setMessage("Patient is successfully created!");
     setOpenSnackbar(true);
     setCreateModal(false);
     handleClose();
@@ -150,9 +150,12 @@ export default function Home() {
       }
       setMessage("Patient is successfully updated!");
       setOpenSnackbar(true);
-      // setEditModal(false);
-      
     });
+  };
+
+  // Function to close Snackbar
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -173,30 +176,37 @@ export default function Home() {
           itemsPerPage={itemsPerPage}
           handleItemsPerPageChange={handleItemsPerPageChange}
         />
-        <TableComponent
-          data={
-            data &&
-            filteredData &&
-            statusFilteredData &&
-            breedFilteredData &&
-            paginatedData
-          }
-          remove={removeItemHandler}
-          onSubmit={handleOnUpdate}
-          editModal={editModal}
-          deleteModal={deleteModal}
-          handleCloseEdit={handleCloseEdit}
-        />
+        {breedFilteredData.length === 0 ? (
+          <div className={styles.data}>There is no data available !</div>
+        ) : (
+          <>
+            <TableComponent
+              data={
+                data &&
+                filteredData &&
+                statusFilteredData &&
+                breedFilteredData &&
+                paginatedData
+              }
+              remove={removeItemHandler}
+              onSubmit={handleOnUpdate}
+              editModal={editModal}
+              deleteModal={deleteModal}
+              handleCloseEdit={handleCloseEdit}
+            />
+            <Pagination
+              sx={{ marginTop: "10px", marginLeft: "650px" }}
+              count={Math.ceil(breedFilteredData.length / itemsPerPage)}
+              page={currentPage}
+              onChange={handlePageChange}
+            />
+          </>
+        )}
         <MySnackbar
           message={message}
           open={openSnackbar}
           autoHideDuration={6000}
-        />
-        <Pagination
-          sx={{ marginTop: "10px", marginLeft: "650px" }}
-          count={Math.ceil(breedFilteredData.length / itemsPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
+          onClose={handleCloseSnackbar}
         />
       </main>
     </>
