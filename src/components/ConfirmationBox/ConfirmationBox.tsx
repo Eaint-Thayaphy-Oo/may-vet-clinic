@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { RxCross1 } from "react-icons/rx";
-import styles from "./ConfirmationBox.module.css";
+import styles from "./Confirmationbox.module.css";
 import { IconButton } from "@mui/material";
 
 interface ConfirmationBoxProps {
