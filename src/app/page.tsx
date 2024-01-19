@@ -30,7 +30,7 @@ export default function Home() {
 
   //search
   const handleSearch = () => {
-    setCurrentPage(1); // Reset current page to 1 when performing a search
+    setCurrentPage(1); 
   };
 
   const handleSearchInputChange = (event: {
