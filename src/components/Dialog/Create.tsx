@@ -14,7 +14,7 @@ import {
   Select,
   Stack,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -37,12 +37,19 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
   const {
     control,
     handleSubmit,
-    formState: { errors, message },
+    formState: { errors },
   } = useForm<IFormInput>({
     defaultValues: {
       dateOfBirth: null,
+      city: "",
     },
   });
+
+  const [selectedCity, setSelectedCity] = useState("");
+
+  const getFilteredTownships = () => {
+    return townshipOptions.filter((option) => option.city === selectedCity);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
@@ -220,9 +227,13 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                       <Select
                         native
                         value={field.value || ""}
-                        onChange={(e) => field.onChange(e.target.value)}
+                        onChange={(e) => {
+                          setSelectedCity(e.target.value);
+                          field.onChange(e.target.value);
+                        }}
                         sx={{ width: "222px", height: "40px" }}
                       >
+                        <option value="">Please choose city</option>
                         {cityOptions.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
@@ -260,6 +271,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                           marginBottom: "9px",
                         }}
                       >
+                        <option value="">Please choose status</option>
                         {statusOptions.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
@@ -295,6 +307,7 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                           marginBottom: "9px",
                         }}
                       >
+                        <option value="">Please choose breed</option>
                         {breedOptions.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
@@ -384,7 +397,8 @@ export default function Create({ onSubmit, handleClose }: CreateDialogProps) {
                         onChange={(e) => field.onChange(e.target.value)}
                         sx={{ width: "222px", height: "40px" }}
                       >
-                        {townshipOptions.map((option) => (
+                        <option value="">Please choose township</option>
+                        {getFilteredTownships().map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
                           </option>

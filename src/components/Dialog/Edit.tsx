@@ -14,7 +14,7 @@ import {
   Select,
   Stack,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { RxCross1 } from "react-icons/rx";
 import styles from "./dialog.module.css";
@@ -52,6 +52,9 @@ export default function Edit({
     defaultValues: { ...editItem },
   });
 
+  const [selectedCity, setSelectedCity] = useState(editItem.city || "");
+  const [oldCity, setOldCity] = useState(editItem.city || "");
+
   //update form
   useEffect(() => {
     if (editItem.id) {
@@ -65,8 +68,15 @@ export default function Edit({
       setValue("dateOfBirth", editItem.dateOfBirth || "");
       setValue("address", editItem.address || "");
       setValue("township", editItem.township || "");
+      setOldCity(editItem.city || "");
     }
   }, [editItem, setValue]);
+
+  const getFilteredTownships = () => {
+    // Use the selected city if it's changed, otherwise use the old city
+    const currentCity = selectedCity !== oldCity ? selectedCity : oldCity;
+    return townshipOptions.filter((option) => option.city === currentCity);
+  };
 
   return (
     <>
@@ -245,7 +255,10 @@ export default function Edit({
                         <Select
                           native
                           value={field.value || ""}
-                          onChange={(e) => field.onChange(e.target.value)}
+                          onChange={(e) => {
+                            setSelectedCity(e.target.value);
+                            field.onChange(e.target.value);
+                          }}
                           sx={{ width: "222px", height: "40px" }}
                         >
                           {cityOptions.map((option) => (
@@ -413,7 +426,7 @@ export default function Edit({
                           onChange={(e) => field.onChange(e.target.value)}
                           sx={{ width: "222px", height: "40px" }}
                         >
-                          {townshipOptions.map((option) => (
+                          {getFilteredTownships().map((option) => (
                             <option key={option.value} value={option.value}>
                               {option.label}
                             </option>

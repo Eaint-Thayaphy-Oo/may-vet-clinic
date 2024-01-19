@@ -44,28 +44,28 @@ export const rows = [
 ];
 
 export const statusOptions = [
-  { value: "all", label: "please choose status" },
   { value: "allergy", label: "Allergy" },
   { value: "picky", label: "Picky Eater" },
 ];
 
 export const breedOptions = [
-  { value: "all", label: "please choose breed" },
   { value: "beagle", label: "Beagle" },
   { value: "spaniel", label: "Spaniel" },
   { value: "golden", label: "Golden Retriever" },
 ];
 
 export const cityOptions = [
-  { value: "all", label: "please choose city" },
   { value: "yangon", label: "Yangon" },
-  { value: "insein", label: "Insein" },
-  { value: "tarmwae", label: "Tarmwae" },
+  { value: "taunggyi", label: "Taunggyi" },
+  { value: "bago", label: "Bago" },
 ];
 
 export const townshipOptions = [
-  { value: "all", label: "please choose township" },
-  { value: "yangon", label: "Yangon" },
-  { value: "mandalay", label: "Mandalay" },
-  { value: "Shan", label: "Shan" },
+  { value: "bahan", label: "Bahan", city: "yangon" },
+  { value: "sanchaung", label: "Sanchaung", city: "yangon" },
+  { value: "tamwe", label: "Tamwe", city: "yangon" },
+  { value: "aungban", label: "Aungban", city: "taunggyi" },
+  { value: "ayetharyar", label: "Ayetharyar", city: "taunggyi" },
+  { value: "bago", label: "Bago", city: "bago" },
+  { value: "daik-u ", label: "Daik-U ", city: "bago" },
 ];

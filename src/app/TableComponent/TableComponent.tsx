@@ -101,7 +101,7 @@ export default function TableComponent({
 
   return (
     <Stack mx={2.5}>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{ maxHeight: 300, overflowY: "auto" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -318,7 +318,7 @@ export default function TableComponent({
                     color: "#000000",
                   }}
                 >
-                  {d.address},{d.city},{d.township}.
+                  {d.address},{d.township},{d.city}.
                 </TableCell>
                 <TableCell onClick={() => handleOpenModal(d?.id)}>
                   <MdMoreVert />

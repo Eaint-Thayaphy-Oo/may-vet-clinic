@@ -101,7 +101,7 @@ export default function Header({
                 value={selectedStatus}
                 onChange={(event) => handleStatusChange(event)}
               >
-                <option value="" disabled>Status All</option>
+                <option value="">Status All</option>
                 {status.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -129,7 +129,7 @@ export default function Header({
                 value={selectedBreed}
                 onChange={(event) => handleBreedChange(event)}
               >
-                <option value="" disabled>Breed All</option>
+                <option value="">Breed All</option>
                 {breed.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}

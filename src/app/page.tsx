@@ -29,10 +29,15 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
 
   //search
+  const handleSearch = () => {
+    setCurrentPage(1); // Reset current page to 1 when performing a search
+  };
+
   const handleSearchInputChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
     setSearchInput(event.target.value);
+    handleSearch();
   };
 
   const filteredData = data.filter((item) => {
@@ -44,7 +49,10 @@ export default function Home() {
       item.city?.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.status.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.breed.toLowerCase().includes(searchInput.toLowerCase()) ||
-      item.dateOfBirth?.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.dateOfBirth
+        ?.toString()
+        .toLowerCase()
+        .includes(searchInput.toLowerCase()) ||
       item.township?.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.address.toLowerCase().includes(searchInput.toLowerCase())
     );
@@ -194,12 +202,14 @@ export default function Home() {
               deleteModal={deleteModal}
               handleCloseEdit={handleCloseEdit}
             />
-            <Pagination
-              sx={{ marginTop: "10px", marginLeft: "650px" }}
-              count={Math.ceil(breedFilteredData.length / itemsPerPage)}
-              page={currentPage}
-              onChange={handlePageChange}
-            />
+            {searchInput === "" && (
+              <Pagination
+                sx={{ marginTop: "10px", marginLeft: "650px" }}
+                count={Math.ceil(breedFilteredData.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+              />
+            )}
           </>
         )}
         <MySnackbar
